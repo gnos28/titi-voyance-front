@@ -1,0 +1,65 @@
+@import "../styles/variables.scss";
+
+.headerContainer {
+  height: $header-height;
+  background-color: $background-light;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $font-color;
+  position: relative;
+  overflow: hidden;
+
+  & .titleContainer {
+    position: relative;
+  }
+
+  & header {
+    display: block;
+  }
+
+  & h1 {
+    margin: 0;
+    font-family: "Comfortaa";
+    font-weight: 400;
+    user-select: none;
+    font-size: 44px;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.cardContainer {
+  position: absolute;
+  top: 0px;
+
+  .card {
+    display: block;
+    position: absolute;
+    height: 80px;
+    width: 50px;
+    background-color: white;
+    border: 4px solid black;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+
+  .card1 {
+    transform: rotateZ(-35deg);
+    left: -10px;
+    top: 10px;
+  }
+  .card2 {
+    transform: rotateZ(20deg);
+    left: 25px;
+  }
+}
+
+.cardContainerLeft {
+  left: -110px;
+}
+.cardContainerRight {
+  right: -80px;
+  transform: rotateZ(45deg);
+}

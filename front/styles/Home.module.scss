@@ -1,0 +1,42 @@
+@import "./variables.scss";
+
+.main {
+  width: 80%;
+  max-width: 1100px;
+  min-height: calc(100vh - $header-height - $navbar-height);
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+$background-width: 40%;
+
+.sideBackground {
+  position: relative;
+  width: $background-width;
+  height: calc(100vh - $header-height - $navbar-height);
+  user-select: none;
+
+  & img {
+    object-fit: cover;
+  }
+
+  .backgroundShadow {
+    position: absolute;
+    right: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    height: 100%;
+    width: 30%;
+  }
+}
+
+.sideContent {
+  position: relative;
+  width: calc(100% - $background-width);
+  height: calc(100vh - $header-height - $navbar-height);
+  background-color: black;
+  padding: 10px;
+  color: $background-superlight;
+}

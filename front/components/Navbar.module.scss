@@ -1,0 +1,19 @@
+@import "../styles/variables.scss";
+
+.navContainer {
+  background-color: $background-dark;
+  height: $navbar-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  & a {
+    color: $font-color;
+    font-size: 24px;
+  }
+
+  & .active {
+    font-weight: bold;
+  }
+}
