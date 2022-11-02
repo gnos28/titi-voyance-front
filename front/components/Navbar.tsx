@@ -5,7 +5,7 @@ import MenuContext from "../contexts/menuContext";
 
 const items = [
   { name: "Accueil", link: "/" },
-  { name: "Tarifs", link: "tarifs" },
+  { name: "Prestations", link: "prestations" },
   { name: "Me contacter", link: "contact" },
 ];
 

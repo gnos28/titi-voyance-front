@@ -19,14 +19,27 @@
     auto-fill,
     min(300px, calc((80vw - 60px) / 3 - 40px))
   );
-  //   gap: 40px;
+  gap: 40px;
   position: relative;
 
   & article {
     background-color: yellow;
     width: min(300px, calc((80vw - 60px) / 3 - 40px));
-    height: calc(80vw / 3);
-    margin-bottom: 40px;
+    height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.6);
+    // margin-bottom: 40px;
     position: relative;
   }
+
+  & > div:hover div > div {
+    filter: opacity(1);
+  }
+
+
+  & > div:hover div > div > div {
+    box-shadow: $background-dark 0px 0px 30px;
+  }
+}
+
+.articlesContainer > div > div > div {
+  box-shadow: $background-dark 0px 0px 15px;
 }
