@@ -62,10 +62,6 @@ const Prestations: NextPageWithLayout = () => {
               </div>
             ))
           : prestations_list.map((prestation) => (
-              // <Link
-              //   onClick={(e) => e.preventDefault}
-              //   href={`prestations/${prestation.link || ""}`}
-              // >
               <Card
                 onClick={() => handleCardClick(prestation.link)}
                 key={prestation.name}
@@ -80,7 +76,6 @@ const Prestations: NextPageWithLayout = () => {
                   />
                 </article>
               </Card>
-              // </Link>
             ))}
       </main>
     </>

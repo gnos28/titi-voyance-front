@@ -1,6 +1,45 @@
+@import "./variables.scss";
+
 .prestationDetailsContainer {
   // background-color: white;
   color: white;
+  padding: 30px;
+
+  .prestationDescriptionContainer {
+    display: flex;
+
+    .articlesContainer {
+      padding: 40px 20px;
+      display: grid;
+      grid-template-rows: auto;
+      justify-content: space-around;
+      grid-template-columns: repeat(
+        auto-fill,
+        min(400px, calc((100vw - 30px) / 5 - 30px))
+      );
+      gap: 30px;
+      position: relative;
+
+      & article {
+        width: min(400px, calc((100vw - 30px) / 5 - 30px));
+        height: calc(min(400px, calc((100vw - 30px) / 5 - 30px)) / 0.6);
+        position: relative;
+      }
+
+      & > div:hover div > div {
+        filter: opacity(1);
+      }
+
+      & > div:hover div > div > div {
+        box-shadow: $background-dark 0px 0px 30px;
+      }
+    }
+
+    .articlesContainer > div > div > div {
+      box-shadow: $background-dark 0px 0px 15px;
+      cursor: default;
+    }
+  }
 }
 
 .dateTimeContainer {

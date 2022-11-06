@@ -4,7 +4,7 @@ import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 type Children = { children: ReactNode };
 
@@ -28,12 +28,14 @@ export default function Layout({ children }: Children) {
   }, []);
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Header />
-      <Navbar menu={menu} setMenu={setMenu} />
-      <div className={styles.container}>
-        <div className={styles.mainContainer}>{children}</div>
-      </div>
-    </ThemeProvider>
+    <PayPalScriptProvider options={{ "client-id": "test" }}>
+      <ThemeProvider theme={darkTheme}>
+        <Header />
+        <Navbar menu={menu} setMenu={setMenu} />
+        <div className={styles.container}>
+          <div className={styles.mainContainer}>{children}</div>
+        </div>
+      </ThemeProvider>{" "}
+    </PayPalScriptProvider>
   );
 }

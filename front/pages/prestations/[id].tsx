@@ -12,6 +12,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/fr";
 import dayjs, { Dayjs } from "dayjs";
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+//@ts-ignore
+import Card from "react-animated-3d-card";
+import Prestation from "../../components/Prestation";
 
 const hourList = Array(20)
   .fill(undefined)
@@ -48,10 +52,28 @@ const Prestation_details: NextPageWithLayout = () => {
         {prestation && (
           <>
             <h2>{prestation.name}</h2>
-            <p>{prestation.description_long}</p>
-            <p>
-              {prestation.price} € {prestation.duration} minutes
-            </p>
+            <div className={styles.prestationDescriptionContainer}>
+              <div className={styles.articlesContainer}>
+                <Card key={prestation.name}>
+                  <article>
+                    <Prestation
+                      name={prestation.name}
+                      description={prestation.description}
+                      price={prestation.price}
+                      background={prestation.background}
+                      link={prestation.link}
+                    />
+                  </article>
+                </Card>
+              </div>
+
+              <div>
+                <p>{prestation.description_long}</p>
+                <p>
+                  {prestation.price} € {prestation.duration} minutes
+                </p>
+              </div>
+            </div>
             <h3>1. Choisir un créneau pour le rendez-vous</h3>
             <div className={styles.dateTimeContainer}>
               <LocalizationProvider
@@ -98,6 +120,8 @@ const Prestation_details: NextPageWithLayout = () => {
               </LocalizationProvider>
             </div>
             <h3>2. Payer la prestation via paypal</h3>
+            <PayPalButtons style={{ layout: "horizontal" }} />
+            <h3>3. Ajouter le rendez-vous à votre agenda</h3>
           </>
         )}
       </div>
