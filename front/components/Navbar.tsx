@@ -1,25 +1,27 @@
-import React, { useContext } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
-import MenuContext from "../contexts/menuContext";
 
-const items = [
+type NavbarProps = {
+  menu: string;
+  setMenu: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const menuItems = [
   { name: "Accueil", link: "/" },
-  { name: "Prestations", link: "prestations" },
-  { name: "Me contacter", link: "contact" },
+  { name: "Prestations", link: "/prestations" },
+  { name: "Me contacter", link: "/contact" },
 ];
 
-const Navbar = () => {
-  const { menu, setMenu } = useContext(MenuContext);
-
+const Navbar = ({ menu, setMenu }: NavbarProps) => {
   return (
     <nav className={styles.navContainer}>
-      {items.map((item) => (
+      {menuItems.map((item) => (
         <Link
           key={item.name}
           href={item.link}
-          className={menu === item.name ? styles.active : ""}
-          onClick={() => setMenu(item.name)}
+          className={menu === item.link ? styles.active : ""}
+          onClick={() => setMenu(item.link)}
         >
           {item.name}
         </Link>

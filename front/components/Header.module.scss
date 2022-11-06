@@ -1,6 +1,8 @@
 @import "../styles/variables.scss";
 
 .headerContainer {
+  position: fixed;
+  width: 100%;
   z-index: 1;
   height: $header-height;
   background-color: $background-light;
@@ -8,7 +10,6 @@
   justify-content: center;
   align-items: center;
   color: $font-color;
-  position: relative;
   overflow: hidden;
 
   & .titleContainer {
@@ -24,7 +25,7 @@
     font-family: "Comfortaa";
     font-weight: 400;
     user-select: none;
-    font-size: 44px;
+    font-size: clamp(20px, 6vw, 44px);
     text-align: center;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
   }
@@ -58,9 +59,21 @@
 }
 
 .cardContainerLeft {
-  left: -110px;
+  left: -80px;
+  transform: scale(0.8);
 }
 .cardContainerRight {
-  right: -80px;
-  transform: rotateZ(45deg);
+  right: -50px;
+  transform: rotateZ(45deg) scale(0.8);
+}
+
+@media screen and (min-width: 750px) {
+  .cardContainerLeft {
+    left: -110px;
+    transform: scale(1);
+  }
+  .cardContainerRight {
+    right: -80px;
+    transform: rotateZ(45deg);
+  }
 }

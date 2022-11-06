@@ -19,5 +19,10 @@
     "react-dom": "18.2.0",
     "sass": "^1.55.0",
     "typescript": "4.8.4"
+  },
+  "overrides": {
+    "react-animated-3d-card": {
+      "react": "$react"
+    }
   }
 }

@@ -5,35 +5,31 @@
   max-width: 1100px;
   min-height: calc(100vh - $header-height - $navbar-height);
   background-color: black;
-  //   display: flex;
-  //   justify-content: center;
   position: relative;
   padding: 40px 30px;
 }
 
 .articlesContainer {
+  padding: 40px 20px;
   display: grid;
   grid-template-rows: auto;
   justify-content: space-around;
   grid-template-columns: repeat(
     auto-fill,
-    min(300px, calc((80vw - 60px) / 3 - 40px))
+    min(400px, calc((100vw - 30px) / 2 - 30px))
   );
-  gap: 40px;
+  gap: 30px;
   position: relative;
 
   & article {
-    background-color: yellow;
-    width: min(300px, calc((80vw - 60px) / 3 - 40px));
-    height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.6);
-    // margin-bottom: 40px;
+    width: min(400px, calc((100vw - 30px) / 2 - 30px));
+    height: calc(min(400px, calc((100vw - 30px) / 2 - 30px)) / 0.6);
     position: relative;
   }
 
   & > div:hover div > div {
     filter: opacity(1);
   }
-
 
   & > div:hover div > div > div {
     box-shadow: $background-dark 0px 0px 30px;
@@ -42,4 +38,80 @@
 
 .articlesContainer > div > div > div {
   box-shadow: $background-dark 0px 0px 15px;
+}
+
+@keyframes zoomOut {
+  0% {
+    filter: opacity(1);
+    transform: scale(1);
+  }
+  100% {
+    filter: opacity(0);
+    transform: scale(0);
+  }
+}
+
+.animateOut {
+  animation: zoomOut ease-in 0.5s both;
+}
+
+@keyframes zoomIn {
+  0% {
+    filter: opacity(1);
+    transform: scale(1);
+  }
+  100% {
+    filter: opacity(0);
+    transform: scale(5);
+  }
+}
+
+.animateIn {
+  animation: zoomIn ease-in 0.5s both;
+}
+
+@media screen and (min-width: 750px) {
+  .articlesContainer {
+    padding: 40px 30px;
+    grid-template-columns: repeat(
+      auto-fill,
+      min(350px, calc((80vw - 40px) / 2 - 40px))
+    );
+    gap: 40px;
+
+    & article {
+      width: min(350px, calc((80vw - 40px) / 2 - 40px));
+      height: calc(min(350px, calc((80vw - 40px) / 2 - 40px)) / 0.6);
+    }
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .articlesContainer {
+    grid-template-columns: repeat(
+      auto-fill,
+      min(300px, calc((80vw - 60px) / 3 - 40px))
+    );
+    gap: 40px;
+
+    & article {
+      width: min(300px, calc((80vw - 60px) / 3 - 40px));
+      height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.6);
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .articlesContainer {
+    grid-template-columns: repeat(
+      auto-fill,
+      min(220px, calc((80vw - 80px) / 4 - 40px))
+    );
+    gap: 40px;
+
+    & article {
+      width: min(220px, calc((80vw - 80px) / 4 - 40px));
+      height: calc(min(220px, calc((80vw - 80px) / 4 - 40px)) / 0.6);
+    }
+  }
 }

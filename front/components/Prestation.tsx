@@ -7,6 +7,7 @@ type PrestationProps = {
   description: string;
   price: number;
   background: string;
+  link: string;
 };
 
 const Prestation = ({
@@ -14,6 +15,7 @@ const Prestation = ({
   description,
   price,
   background,
+  link,
 }: PrestationProps) => {
   return (
     <div className={styles.prestationContainer}>
