@@ -3,8 +3,16 @@ import Header from "./Header";
 import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 type Children = { children: ReactNode };
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export default function Layout({ children }: Children) {
   const [menu, setMenu] = useState<string>("/");
@@ -20,12 +28,12 @@ export default function Layout({ children }: Children) {
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <Header />
       <Navbar menu={menu} setMenu={setMenu} />
       <div className={styles.container}>
         <div className={styles.mainContainer}>{children}</div>
       </div>
-    </>
+    </ThemeProvider>
   );
 }
