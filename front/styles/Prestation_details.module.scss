@@ -7,6 +7,7 @@
 
   .prestationDescriptionContainer {
     display: flex;
+    position: relative;
 
     .articlesContainer {
       padding: 40px 20px;
@@ -33,6 +34,15 @@
       & > div:hover div > div > div {
         box-shadow: $background-dark 0px 0px 30px;
       }
+    }
+
+    .articlesContainer::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 
     .articlesContainer > div > div > div {

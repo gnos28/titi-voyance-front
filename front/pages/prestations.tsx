@@ -19,9 +19,9 @@ const Prestations: NextPageWithLayout = () => {
   const handleCardClick = (link: string) => {
     setAnimateCard(link);
     setTimeout(() => {
-      setAnimateCard(undefined);
+      // setAnimateCard(undefined);
       router.push(`prestations/${link || ""}`);
-    }, 450);
+    }, 350);
   };
 
   const getCardClass = (link: string) => {
