@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  back:
+    build:
+      context: ./back/
+      target: dev
+    volumes:
+      - ./back:/src
+    command: npm run start:dev
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
+    networks:
+      - dockerlan
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+
+  front:
+    build:
+      context: ./front/
+      target: dev
+    volumes:
+      - ./front:/app
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    networks:
+      - dockerlan
+    restart: always
+    depends_on:
+      - back
+  # bdd:
+  #   build:
+  #     context: ./bdd/
+  #   environment:
+  #     - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+  #   volumes:
+  #     - ${PWD}/mariadb:/var/lib/mysql
+  #     - ${PWD}/mariadb/home:/root
+  #   ports:
+  #     - "3307:3306"
+  #   networks:
+  #     - dockerlan
+  #   restart: always
+
+networks:
+  dockerlan:
+    driver: bridge

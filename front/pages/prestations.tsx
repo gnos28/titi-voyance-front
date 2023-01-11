@@ -44,11 +44,11 @@ const Prestations: NextPageWithLayout = () => {
       <main className={styles.articlesContainer}>
         {animateCard
           ? prestations_list.map((prestation) => (
-              <div className={getCardClass(prestation.link)}>
-                <Card
-                  onClick={() => handleCardClick(prestation.link)}
-                  key={prestation.name}
-                >
+              <div
+                className={getCardClass(prestation.link)}
+                key={prestation.name}
+              >
+                <Card onClick={() => handleCardClick(prestation.link)}>
                   <article>
                     <Prestation
                       name={prestation.name}
