@@ -4,7 +4,11 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
-        <meta name="description" content="Les cartes de titiphe - voyance - cartomancie" />
+        <title>Les cartes de titiphe</title>
+        <meta
+          name="description"
+          content="Les cartes de titiphe, voyance et cartomancie"
+        />
         <link rel="icon" href="/favicon96.ico" />
       </Head>
       <body>
