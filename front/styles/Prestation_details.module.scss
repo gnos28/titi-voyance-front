@@ -59,25 +59,27 @@
 }
 
 .dateTimeContainer {
-  height: 330px;
+  height: 345px;
   background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  padding: 5px;
 
   .hourSelectionContainer {
     overflow: auto;
     width: 50%;
-    // background-color: pink;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    // align-items: flex-start;
     flex-grow: 0;
-    // align-content: flex-start;
   }
+}
+
+.creneauWarning {
+  border: 1px solid red;
 }
 
 .infoContainer {

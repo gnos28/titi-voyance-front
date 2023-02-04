@@ -30,6 +30,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
+type ErrorMessage = {
+  type: "nom" | "prenom" | "birthdate" | "contact" | "creneau";
+  content: string;
+};
+
 const hourList = Array(20)
   .fill(undefined)
   .map(
@@ -54,6 +59,7 @@ const Prestation_details: NextPageWithLayout = () => {
   const [telephone, setTelephone] = useState<string>("");
   const [instagram, setInstagram] = useState<string>("");
   const [whatsapp, setWhatsapp] = useState<string>("");
+  const [errors, setErrors] = useState<ErrorMessage[]>([]);
 
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
@@ -259,30 +265,54 @@ const Prestation_details: NextPageWithLayout = () => {
 
     // ^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$ // phone number validator
 
-    const message = [];
+    const errorMessages: ErrorMessage[] = [];
 
-    if (nom === "") message.push("veuillez renseigner votre nom");
+    if (nom === "")
+      errorMessages.push({
+        type: "nom",
+        content: "veuillez renseigner votre nom",
+      });
 
-    if (prenom === "") message.push("veuillez renseigner votre prénom");
+    if (prenom === "")
+      errorMessages.push({
+        type: "prenom",
+        content: "veuillez renseigner votre prénom",
+      });
 
     if (birthdate === null)
-      message.push("veuillez renseigner votre date de naissance");
+      errorMessages.push({
+        type: "birthdate",
+        content: "veuillez renseigner votre date de naissance",
+      });
 
     if (birthdate !== null && birthdate.getTime() > is18)
-      message.push("ces prestations sont interdites aux mineurs");
+      errorMessages.push({
+        type: "birthdate",
+        content: "ces prestations sont interdites aux mineurs",
+      });
+
+    if (errorMessages.length) return setErrors(errorMessages);
 
     if (telephone === "" && instagram === "" && whatsapp === "")
-      message.push("veuillez indiquer un moyen de vous contacter");
+      errorMessages.push({
+        type: "contact",
+        content: "veuillez indiquer un moyen de vous contacter",
+      });
+
+    if (errorMessages.length) return setErrors(errorMessages);
 
     if (date === null || !hour)
-      message.push("veuillez sélectionner un créneau pour la prestation");
+      errorMessages.push({
+        type: "creneau",
+        content: "veuillez sélectionner un créneau pour la prestation",
+      });
 
-    return message;
+    setErrors(errorMessages);
   };
 
-  console.log("date", date, typeof date);
-  console.log("hour", hour, typeof hour);
-  console.log("prestation", prestation);
+  useEffect(() => {
+    allowPaypal();
+  }, [nom, prenom, birthdate, telephone, instagram, whatsapp, date, hour]);
 
   useEffect(() => {
     getBookedSlots();
@@ -339,6 +369,7 @@ const Prestation_details: NextPageWithLayout = () => {
                     required
                     value={nom}
                     onChange={(newValue) => handleInputChange(newValue, "nom")}
+                    error={errors.map((err) => err.type).includes("nom")}
                   />
                   <TextField
                     id="outlined-basic"
@@ -349,6 +380,7 @@ const Prestation_details: NextPageWithLayout = () => {
                     onChange={(newValue) =>
                       handleInputChange(newValue, "prenom")
                     }
+                    error={errors.map((err) => err.type).includes("prenom")}
                   />
                   <TextField
                     id="outlined-basic"
@@ -365,7 +397,17 @@ const Prestation_details: NextPageWithLayout = () => {
                     inputFormat="MM/DD/YYYY"
                     value={birthdate}
                     onChange={handleBirthdateChange}
-                    renderInput={(params) => <TextField {...params} required />}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        required
+                        error={errors
+                          .map((err) => err.type)
+                          .includes("birthdate")}
+                      />
+                    )}
+
+                    // error={errors.map((err) => err.type).includes("birthdate")}
                   />
                 </div>
                 <div className={styles.maxWidth}>
@@ -391,6 +433,7 @@ const Prestation_details: NextPageWithLayout = () => {
                       handleContactChange(newValue, "telephone")
                     }
                     value={telephone}
+                    error={errors.map((err) => err.type).includes("contact")}
                   />
                 </div>
                 <div>
@@ -403,6 +446,7 @@ const Prestation_details: NextPageWithLayout = () => {
                       handleContactChange(newValue, "instagram")
                     }
                     value={instagram}
+                    error={errors.map((err) => err.type).includes("contact")}
                   />
                 </div>
                 <div>
@@ -415,6 +459,7 @@ const Prestation_details: NextPageWithLayout = () => {
                       handleContactChange(newValue, "whatsapp")
                     }
                     value={whatsapp}
+                    error={errors.map((err) => err.type).includes("contact")}
                   />
                 </div>
               </div>
@@ -422,17 +467,33 @@ const Prestation_details: NextPageWithLayout = () => {
                 3. Je choisi un créneau pour le rendez-vous
                 {displaySelectedDateTime()}
               </h3>
-              <div className={styles.dateTimeContainer}>
-                <StaticDatePicker
-                  displayStaticWrapperAs="desktop"
-                  label="Week picker"
-                  value={date}
-                  onChange={handleDateChange}
-                  // renderDay={renderWeekPickerDay}
-                  renderInput={(params) => <TextField {...params} />}
-                  inputFormat="'Week of' MMM d"
-                  showDaysOutsideCurrentMonth={true}
-                />
+              <div
+                className={[
+                  styles.dateTimeContainer,
+                  errors.map((err) => err.type).includes("creneau")
+                    ? styles.creneauWarning
+                    : "",
+                ].join(" ")}
+              >
+                <div>
+                  <StaticDatePicker
+                    displayStaticWrapperAs="desktop"
+                    label="Week picker"
+                    value={date}
+                    onChange={handleDateChange}
+                    // renderDay={renderWeekPickerDay}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        error={errors
+                          .map((err) => err.type)
+                          .includes("creneau")}
+                      />
+                    )}
+                    inputFormat="'Week of' MMM d"
+                    showDaysOutsideCurrentMonth={true}
+                  />
+                </div>
                 <div className={styles.hourSelectionContainer}>
                   {hourList.map((h) => (
                     <ListItemButton
@@ -454,7 +515,7 @@ const Prestation_details: NextPageWithLayout = () => {
                 </div>
               </div>
               <h3>4. Je paye la prestation via paypal</h3>
-              {allowPaypal().length === 0 ? (
+              {errors.length === 0 ? (
                 <PayPalButtons
                   style={{ layout: "horizontal" }}
                   createOrder={handleCreateOrder}
@@ -462,8 +523,8 @@ const Prestation_details: NextPageWithLayout = () => {
                 />
               ) : (
                 <div className={styles.warning}>
-                  {allowPaypal().map((message) => (
-                    <p>- {message}</p>
+                  {errors.map((message) => (
+                    <p>- {message.content}</p>
                   ))}
                 </div>
               )}
