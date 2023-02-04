@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node dist/src/index.js",
+    "start": "ts-node dist/index.js",
     "build": "tsc --project tsconfig.build.json",
     "start:dev": "ts-node-dev src/index.ts",
     "migrate": "ts-node-dev migrate.ts"

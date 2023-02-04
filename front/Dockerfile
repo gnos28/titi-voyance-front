@@ -1,7 +1,7 @@
 FROM node:18 as base
 
-WORKDIR /app
-COPY package*.json ./
+WORKDIR /front
+COPY package*.json /front
 EXPOSE 3000
 
 FROM base as production
@@ -11,7 +11,14 @@ RUN npm install -g typescript ts-node @types/node @types/react @types/react-burg
 RUN npm install
 RUN npm install sharp
 ENV NODE_ENV=production
-COPY . ./
+COPY api /front/api
+COPY components /front/components
+COPY data /front/data
+COPY pages /front/pages
+COPY public /front/public
+COPY styles /front/styles
+COPY tsconfig.json /front/
+COPY next.config.js /front/
 RUN npm run build
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -23,5 +30,12 @@ CMD ["next", "start"]
 FROM base as dev
 ENV NODE_ENV=development
 RUN npm install
-COPY . ./
+COPY api /front/api
+COPY components /front/components
+COPY data /front/data
+COPY pages /front/pages
+COPY public /front/public
+COPY styles /front/styles
+COPY tsconfig.json /front/
+COPY next.config.js /front/
 CMD ["next", "dev"]

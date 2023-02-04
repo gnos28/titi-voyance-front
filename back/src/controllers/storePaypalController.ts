@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { calendar_v3 } from "googleapis";
 import * as dotenv from "dotenv";
 import { getAgenda } from "../utils/google";
 import { exportToSheet } from "../utils/exportToSheet";
