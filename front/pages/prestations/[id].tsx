@@ -17,16 +17,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/fr";
 import dayjs from "dayjs";
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Icon,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { ListItemButton, ListItemText } from "@mui/material";
 import {
   PayPalButtons,
   PayPalButtonsComponentProps,
@@ -362,31 +353,25 @@ const Prestation_details: NextPageWithLayout = () => {
                   inputFormat="'Week of' MMM d"
                   showDaysOutsideCurrentMonth={true}
                 />
-                <List
-                  sx={{
-                    width: "100%",
-                    maxWidth: 360,
-                    bgcolor: "background.paper",
-                    position: "relative",
-                    overflow: "auto",
-                    maxHeight: "100%",
-                    "& ul": { padding: 0 },
-                  }}
-                >
+                <div className={styles.hourSelectionContainer}>
                   {hourList.map((h) => (
-                    <ListItem disablePadding key={h}>
-                      <ListItemButton
-                        onClick={(e: BaseSyntheticEvent) => {
-                          setHour(e.target.innerText);
-                        }}
-                        selected={hour === h ? true : false}
-                        disabled={isDisabled(h)}
-                      >
-                        <ListItemText primary={h} />
-                      </ListItemButton>
-                    </ListItem>
+                    <ListItemButton
+                      key={h}
+                      sx={{
+                        width: 75,
+                        maxWidth: 75,
+                        textAlign: "center",
+                      }}
+                      onClick={(e: BaseSyntheticEvent) => {
+                        setHour(e.target.innerText);
+                      }}
+                      selected={hour === h ? true : false}
+                      disabled={isDisabled(h)}
+                    >
+                      <ListItemText primary={h} />
+                    </ListItemButton>
                   ))}
-                </List>
+                </div>
               </div>
               <h3>4. Je paye la prestation via paypal</h3>
               <PayPalButtons

@@ -59,6 +59,19 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+
+  .hourSelectionContainer {
+    overflow: auto;
+    width: 50%;
+    // background-color: pink;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // align-items: flex-start;
+    flex-grow: 0;
+    // align-content: flex-start;
+  }
 }
 
 .infoContainer {

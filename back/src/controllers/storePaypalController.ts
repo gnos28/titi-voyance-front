@@ -8,19 +8,36 @@ export type ControllerType = {
   [key: string]: (req: Request, res: Response) => Promise<void>;
 };
 
+type PurchasingData = {
+  id: string;
+  create_time: string;
+  purchasedAmount: string;
+  purchasedCurrency: string;
+  status: string;
+  payer_id: string;
+  payer_name: string;
+  prenom: string;
+  nom: string;
+  email_adress: string;
+  address: string;
+  date: Date;
+  hour: string;
+  prestationName: string;
+  prestationDuration: number;
+  prestationPrice: number;
+};
+
 const storePaypalController: ControllerType = {};
 
 storePaypalController.store = async (req, res) => {
   try {
-    const monthYear = req.body.monthYear as string;
+    const purchasingData = req.body.purchasingData as string;
 
     // save data to google sheet
 
     // create new agenda event
 
     // send mail to customer
-
-
 
     // const slots = await getSlotsByDate(monthYear);
     res.send({});
