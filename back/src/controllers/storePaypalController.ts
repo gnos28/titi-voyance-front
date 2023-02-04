@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { calendar_v3 } from "googleapis";
 import * as dotenv from "dotenv";
 import { getAgenda } from "../utils/google";
+import { exportToSheet } from "../utils/exportToSheet";
 dotenv.config();
 
 export type ControllerType = {
@@ -9,32 +10,35 @@ export type ControllerType = {
 };
 
 type PurchasingData = {
-  id: string;
-  create_time: string;
-  purchasedAmount: string;
-  purchasedCurrency: string;
-  status: string;
-  payer_id: string;
-  payer_name: string;
-  prenom: string;
-  nom: string;
-  email_adress: string;
-  address: string;
-  date: Date;
-  hour: string;
-  prestationName: string;
-  prestationDuration: number;
-  prestationPrice: number;
+  id: number;
+  create_time: string | undefined;
+  purchasedAmount: string | undefined;
+  purchasedCurrency: string | undefined;
+  status: string | undefined;
+  payer_id: string | undefined;
+  payer_name: string | undefined;
+  prenom: string | undefined;
+  nom: string | undefined;
+  email_adress: string | undefined;
+  address: string | undefined;
+  date: string | undefined;
+  hour: string | undefined;
+  prestationName: string | undefined;
+  prestationDuration: number | undefined;
+  prestationPrice: number | undefined;
+  telephone: string | undefined;
+  instagram: string | undefined;
+  whatsapp: string | undefined;
 };
 
 const storePaypalController: ControllerType = {};
 
 storePaypalController.store = async (req, res) => {
   try {
-    const purchasingData = req.body.purchasingData as string;
+    const purchasingData = req.body.purchasingData as PurchasingData;
 
     // save data to google sheet
-
+    exportToSheet([purchasingData], "840247244");
     // create new agenda event
 
     // send mail to customer

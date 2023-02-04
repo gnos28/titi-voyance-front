@@ -32,19 +32,6 @@ services:
     restart: always
     depends_on:
       - back
-  # bdd:
-  #   build:
-  #     context: ./bdd/
-  #   environment:
-  #     - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-  #   volumes:
-  #     - ${PWD}/mariadb:/var/lib/mysql
-  #     - ${PWD}/mariadb/home:/root
-  #   ports:
-  #     - "3307:3306"
-  #   networks:
-  #     - dockerlan
-  #   restart: always
 
 networks:
   dockerlan:

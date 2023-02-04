@@ -29,6 +29,7 @@ import { agendaAPI } from "../../api/agenda";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { paypalAPI } from "../../api/paypal";
 
 type ErrorMessage = {
   type: "nom" | "prenom" | "birthdate" | "contact" | "creneau";
@@ -154,7 +155,7 @@ const Prestation_details: NextPageWithLayout = () => {
     const actionsOrder = actions.order;
     if (!actionsOrder) return new Promise((resolve) => resolve());
 
-    return actionsOrder.capture().then((details) => {
+    return actionsOrder.capture().then(async (details) => {
       console.log("details", details);
 
       const { create_time, id, status } = details;
@@ -172,13 +173,13 @@ const Prestation_details: NextPageWithLayout = () => {
       let address: string | undefined;
       if (rawAddress) address = JSON.stringify(rawAddress);
 
-      if (status === "COMPLETED") {
+      if (status === "COMPLETED" && nom && prenom && date && hour) {
         const prestationName = prestation.name;
         const prestationDuration = prestation.duration;
         const prestationPrice = prestation.price;
 
         const purchasingData = {
-          id,
+          id: parseInt(id, 10),
           create_time,
           purchasedAmount,
           purchasedCurrency,
@@ -194,7 +195,12 @@ const Prestation_details: NextPageWithLayout = () => {
           prestationName,
           prestationDuration,
           prestationPrice,
+          telephone,
+          instagram,
+          whatsapp,
         };
+
+        await paypalAPI.storePaypal(purchasingData);
 
         console.log("purchasingData", purchasingData);
       }
@@ -216,7 +222,7 @@ const Prestation_details: NextPageWithLayout = () => {
     }
 
     if (type === "email") {
-      cleanedInput = rawInput.replace(/[^a-zA-Z\-\.@]/g, "").toLowerCase();
+      cleanedInput = rawInput.replace(/[^a-zA-Z0-9\-\.@]/g, "").toLowerCase();
     }
 
     if (type === "nom") setNom(cleanedInput);
