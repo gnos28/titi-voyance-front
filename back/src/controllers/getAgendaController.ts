@@ -74,7 +74,7 @@ const getAllEvents = async () => {
   const agenda = getAgenda();
 
   const eventList = await agenda.events.list({
-    calendarId: "titi.cange@gmail.com",
+    calendarId: process.env.CALENDAR_ID,
   });
 
   return trimEventDate(eventList.data.items || []);
@@ -91,7 +91,7 @@ const getSlotsByDate = async (monthYear: string) => {
     const agenda = getAgenda();
 
     const eventList = await agenda.events.list({
-      calendarId: "titi.cange@gmail.com",
+      calendarId: process.env.CALENDAR_ID,
       timeMin,
       timeMax,
       singleEvents: true,
