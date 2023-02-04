@@ -57,6 +57,9 @@ const Prestation_details: NextPageWithLayout = () => {
   const [dayBookedSlots, setDayBookedSlots] = useState<string[]>([]);
   const previousDate = useRef(new Date());
   const [birthdate, setBrithdate] = useState<Date | null>(null);
+  const [nom, setNom] = useState<string>("");
+  const [prenom, setPrenom] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
@@ -144,7 +147,7 @@ const Prestation_details: NextPageWithLayout = () => {
       });
   };
 
-  const handleApprove: PayPalButtonsComponentProps["onApprove"] = (
+  const handleApprove: PayPalButtonsComponentProps["onApprove"] = async (
     data,
     actions
   ) => {
@@ -160,6 +163,7 @@ const Prestation_details: NextPageWithLayout = () => {
       const prenom = details.payer.name?.given_name;
       const nom = details.payer.name?.surname;
       const payer_id = details.payer.payer_id;
+      const payer_name = details?.payer?.name?.given_name;
 
       const purchasedAmount = details.purchase_units[0]?.amount.value;
       const purchasedCurrency = details.purchase_units[0]?.amount.currency_code;
@@ -169,6 +173,10 @@ const Prestation_details: NextPageWithLayout = () => {
       if (rawAddress) address = JSON.stringify(rawAddress);
 
       if (status === "COMPLETED") {
+        const prestationName = prestation.name;
+        const prestationDuration = prestation.duration;
+        const prestationPrice = prestation.price;
+
         const purchasingData = {
           id,
           create_time,
@@ -176,18 +184,49 @@ const Prestation_details: NextPageWithLayout = () => {
           purchasedCurrency,
           status,
           payer_id,
+          payer_name,
           prenom,
           nom,
           email_adress,
           address,
           date,
           hour,
+          prestationName,
+          prestationDuration,
+          prestationPrice,
         };
-      }
 
-      const name = details?.payer?.name?.given_name;
+        console.log("purchasingData", purchasingData);
+      }
     });
   };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    type: "nom" | "prenom" | "email"
+  ) => {
+    const rawInput = e.target.value;
+    let cleanedInput = "";
+
+    if (type === "nom" || type === "prenom") {
+      cleanedInput = rawInput.replace(
+        /[^a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\s]/g,
+        ""
+      );
+    }
+
+    if (type === "email") {
+      cleanedInput = rawInput.replace(/[^a-zA-Z\-\.@]/g, "").toLowerCase();
+    }
+
+    if (type === "nom") setNom(cleanedInput);
+    if (type === "prenom") setPrenom(cleanedInput);
+    if (type === "email") setEmail(cleanedInput);
+  };
+
+  console.log("date", date, typeof date);
+  console.log("hour", hour, typeof hour);
+  console.log("prestation", prestation);
 
   useEffect(() => {
     getBookedSlots();
@@ -242,18 +281,28 @@ const Prestation_details: NextPageWithLayout = () => {
                     label="Nom"
                     variant="outlined"
                     required
+                    value={nom}
+                    onChange={(newValue) => handleInputChange(newValue, "nom")}
                   />
                   <TextField
                     id="outlined-basic"
                     label="Prénom"
                     variant="outlined"
                     required
+                    value={prenom}
+                    onChange={(newValue) =>
+                      handleInputChange(newValue, "prenom")
+                    }
                   />
                   <TextField
                     id="outlined-basic"
                     label="Email"
                     variant="outlined"
                     type="email"
+                    value={email}
+                    onChange={(newValue) =>
+                      handleInputChange(newValue, "email")
+                    }
                   />
                   <DesktopDatePicker
                     label="Date de naissance"
