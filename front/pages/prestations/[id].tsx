@@ -52,7 +52,7 @@ const Prestation_details: NextPageWithLayout = () => {
   const [monthBookedSlots, setMonthBookedSlots] = useState<string[]>([]);
   const [dayBookedSlots, setDayBookedSlots] = useState<string[]>([]);
   const previousDate = useRef(new Date());
-  const [birthdate, setBrithdate] = useState<Date | null>(null);
+  const [birthdate, setBirthdate] = useState<Date | null>(null);
   const [nom, setNom] = useState<string>("");
   const [prenom, setPrenom] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -71,7 +71,7 @@ const Prestation_details: NextPageWithLayout = () => {
   };
 
   const handleBirthdateChange = (newValue: dayjs.Dayjs | null) => {
-    if (newValue) setBrithdate(newValue.toDate());
+    if (newValue) setBirthdate(newValue.toDate());
   };
 
   const handleDateChange = (newValue: dayjs.Dayjs | null) => {
@@ -310,9 +310,67 @@ const Prestation_details: NextPageWithLayout = () => {
     setErrors(errorMessages);
   };
 
+  const storeToLocalStorage = () => {
+    nom && localStorage.setItem("nom", nom);
+    prenom && localStorage.setItem("prenom", prenom);
+    email && localStorage.setItem("email", email);
+    birthdate && localStorage.setItem("birthdate", JSON.stringify(birthdate));
+    telephone && localStorage.setItem("telephone", telephone);
+    instagram && localStorage.setItem("instagram", instagram);
+    whatsapp && localStorage.setItem("whatsapp", whatsapp);
+    date && localStorage.setItem("date", JSON.stringify(date));
+    hour && localStorage.setItem("hour", hour || "");
+  };
+
+  const retrieveLocalStorage = () => {
+    const localNom = localStorage.getItem("nom");
+    if (localNom) setNom(localNom);
+
+    const localPrenom = localStorage.getItem("prenom");
+    if (localPrenom) setPrenom(localPrenom);
+
+    const localEmail = localStorage.getItem("email");
+    if (localEmail) setEmail(localEmail);
+
+    const localBirthdate = localStorage.getItem("birthdate");
+    if (localBirthdate && localBirthdate !== "null") console.log("boloss");
+
+    if (localBirthdate && localBirthdate !== "null")
+      setBirthdate(new Date(JSON.parse(localBirthdate)));
+
+    const localTelephone = localStorage.getItem("telephone");
+    if (localTelephone) setTelephone(localTelephone);
+
+    const localInstagram = localStorage.getItem("instagram");
+    if (localInstagram) setInstagram(localInstagram);
+
+    const localWhatsapp = localStorage.getItem("whatsapp");
+    if (localWhatsapp) setWhatsapp(localWhatsapp);
+
+    const localDate = localStorage.getItem("date");
+    if (localDate) setDate(new Date(JSON.parse(localDate)));
+
+    const localHour = localStorage.getItem("hour");
+    if (localHour) setHour(localHour);
+  };
+
   useEffect(() => {
     allowPaypal();
   }, [nom, prenom, birthdate, telephone, instagram, whatsapp, date, hour]);
+
+  useEffect(() => {
+    storeToLocalStorage();
+  }, [
+    nom,
+    prenom,
+    email,
+    birthdate,
+    telephone,
+    instagram,
+    whatsapp,
+    date,
+    hour,
+  ]);
 
   useEffect(() => {
     getBookedSlots();
@@ -320,6 +378,7 @@ const Prestation_details: NextPageWithLayout = () => {
 
   useEffect(() => {
     getBookedSlots();
+    retrieveLocalStorage();
   }, []);
 
   return (
@@ -524,7 +583,7 @@ const Prestation_details: NextPageWithLayout = () => {
               ) : (
                 <div className={styles.warning}>
                   {errors.map((message) => (
-                    <p>- {message.content}</p>
+                    <p key={message.type}>- {message.content}</p>
                   ))}
                 </div>
               )}
