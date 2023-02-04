@@ -4,7 +4,10 @@ import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
 import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import {
+  PayPalScriptProvider,
+  ScriptProviderProps,
+} from "@paypal/react-paypal-js";
 
 type Children = { children: ReactNode };
 
@@ -13,6 +16,13 @@ const darkTheme = createTheme({
     mode: "dark",
   },
 });
+
+const initialOptions: ScriptProviderProps["options"] = {
+  "client-id": process.env.PAYPAL_CLIENT_ID as string,
+  currency: "EUR",
+  intent: "capture",
+  // "data-client-token": "boloss",
+};
 
 export default function Layout({ children }: Children) {
   const [menu, setMenu] = useState<string>("/");
@@ -28,7 +38,7 @@ export default function Layout({ children }: Children) {
   }, []);
 
   return (
-    <PayPalScriptProvider options={{ "client-id": "test" }}>
+    <PayPalScriptProvider options={initialOptions}>
       <ThemeProvider theme={darkTheme}>
         <Header />
         <Navbar menu={menu} setMenu={setMenu} />

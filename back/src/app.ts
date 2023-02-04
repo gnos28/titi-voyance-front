@@ -24,8 +24,10 @@ app.use(express.json());
 const router = express.Router();
 
 import getAgenda from "./routes/getAgendaRouter";
+import storePaypal from "./routes/storePaypalRouter";
 
 router.use("/getAgenda", getAgenda);
+router.use("/storePaypal", storePaypal);
 
 app.use("/api", router);
 
