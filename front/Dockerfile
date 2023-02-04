@@ -19,6 +19,7 @@ COPY public /front/public
 COPY styles /front/styles
 COPY tsconfig.json /front/
 COPY next.config.js /front/
+COPY .env.local /front/
 RUN npm run build
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -38,4 +39,5 @@ COPY public /front/public
 COPY styles /front/styles
 COPY tsconfig.json /front/
 COPY next.config.js /front/
+COPY .env.local /front/
 CMD ["next", "dev"]
