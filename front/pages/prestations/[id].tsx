@@ -51,6 +51,9 @@ const Prestation_details: NextPageWithLayout = () => {
   const [nom, setNom] = useState<string>("");
   const [prenom, setPrenom] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [telephone, setTelephone] = useState<string>("");
+  const [instagram, setInstagram] = useState<string>("");
+  const [whatsapp, setWhatsapp] = useState<string>("");
 
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
@@ -215,6 +218,68 @@ const Prestation_details: NextPageWithLayout = () => {
     if (type === "email") setEmail(cleanedInput);
   };
 
+  const handleContactChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    type: "telephone" | "instagram" | "whatsapp"
+  ) => {
+    const rawInput = e.target.value;
+    let cleanedInput = "";
+
+    if (type === "telephone" || type === "whatsapp") {
+      cleanedInput = rawInput.replace(/[^\d\s\+\-\.]/g, "");
+    }
+
+    if (type === "instagram") {
+      cleanedInput = rawInput.replace(/[^a-zA-Z0-9\._]/g, "").toLowerCase();
+    }
+
+    if (type === "telephone") setTelephone(cleanedInput);
+    if (type === "instagram") setInstagram(cleanedInput);
+    if (type === "whatsapp") setWhatsapp(cleanedInput);
+  };
+
+  const displaySelectedDateTime = () => {
+    if (date && hour) {
+      const selectedDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        parseInt(hour.split(":")[0], 10),
+        parseInt(hour.split(":")[1], 10)
+      );
+
+      return " : " + dayjs(selectedDate).format("dddd D MMMM YYYY H:mm");
+    }
+
+    return "";
+  };
+
+  const allowPaypal = () => {
+    const is18 = new Date().getTime() - 365 * 24 * 60 * 60 * 1000;
+
+    // ^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$ // phone number validator
+
+    const message = [];
+
+    if (nom === "") message.push("veuillez renseigner votre nom");
+
+    if (prenom === "") message.push("veuillez renseigner votre prénom");
+
+    if (birthdate === null)
+      message.push("veuillez renseigner votre date de naissance");
+
+    if (birthdate !== null && birthdate.getTime() > is18)
+      message.push("ces prestations sont interdites aux mineurs");
+
+    if (telephone === "" && instagram === "" && whatsapp === "")
+      message.push("veuillez indiquer un moyen de vous contacter");
+
+    if (date === null || !hour)
+      message.push("veuillez sélectionner un créneau pour la prestation");
+
+    return message;
+  };
+
   console.log("date", date, typeof date);
   console.log("hour", hour, typeof hour);
   console.log("prestation", prestation);
@@ -322,6 +387,10 @@ const Prestation_details: NextPageWithLayout = () => {
                     id="outlined-basic"
                     label="Téléphone"
                     variant="outlined"
+                    onChange={(newValue) =>
+                      handleContactChange(newValue, "telephone")
+                    }
+                    value={telephone}
                   />
                 </div>
                 <div>
@@ -330,6 +399,10 @@ const Prestation_details: NextPageWithLayout = () => {
                     id="outlined-basic"
                     label="Instagram"
                     variant="outlined"
+                    onChange={(newValue) =>
+                      handleContactChange(newValue, "instagram")
+                    }
+                    value={instagram}
                   />
                 </div>
                 <div>
@@ -338,10 +411,17 @@ const Prestation_details: NextPageWithLayout = () => {
                     id="outlined-basic"
                     label="WhatsApp"
                     variant="outlined"
+                    onChange={(newValue) =>
+                      handleContactChange(newValue, "whatsapp")
+                    }
+                    value={whatsapp}
                   />
                 </div>
               </div>
-              <h3>3. Je choisi un créneau pour le rendez-vous</h3>
+              <h3>
+                3. Je choisi un créneau pour le rendez-vous
+                {displaySelectedDateTime()}
+              </h3>
               <div className={styles.dateTimeContainer}>
                 <StaticDatePicker
                   displayStaticWrapperAs="desktop"
@@ -374,11 +454,20 @@ const Prestation_details: NextPageWithLayout = () => {
                 </div>
               </div>
               <h3>4. Je paye la prestation via paypal</h3>
-              <PayPalButtons
-                style={{ layout: "horizontal" }}
-                createOrder={handleCreateOrder}
-                onApprove={handleApprove}
-              />
+              {allowPaypal().length === 0 ? (
+                <PayPalButtons
+                  style={{ layout: "horizontal" }}
+                  createOrder={handleCreateOrder}
+                  onApprove={handleApprove}
+                />
+              ) : (
+                <div className={styles.warning}>
+                  {allowPaypal().map((message) => (
+                    <p>- {message}</p>
+                  ))}
+                </div>
+              )}
+
               <h3>
                 5. Le rendez-vous est pris, je peux l'ajouter à mon agenda 😃
               </h3>
