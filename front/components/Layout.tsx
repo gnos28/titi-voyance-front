@@ -18,7 +18,7 @@ const darkTheme = createTheme({
 });
 
 const initialOptions: ScriptProviderProps["options"] = {
-  "client-id": process.env.PAYPAL_CLIENT_ID as string,
+  "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID as string,
   currency: "EUR",
   intent: "capture",
   // "data-client-token": "boloss",

@@ -339,7 +339,6 @@ const Prestation_details: NextPageWithLayout = () => {
     if (localEmail) setEmail(localEmail);
 
     const localBirthdate = localStorage.getItem("birthdate");
-    if (localBirthdate && localBirthdate !== "null") console.log("boloss");
 
     if (localBirthdate && localBirthdate !== "null")
       setBirthdate(new Date(JSON.parse(localBirthdate)));
