@@ -25,6 +25,7 @@ services:
     volumes:
       - ./front/api:/front/api
       - ./front/components:/front/components
+      - ./front/contexts:/front/contexts
       - ./front/data:/front/data
       - ./front/pages:/front/pages
       - ./front/public:/front/public

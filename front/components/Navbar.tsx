@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
-
-type NavbarProps = {
-  menu: string;
-  setMenu: React.Dispatch<React.SetStateAction<string>>;
-};
+import MenuContext from "../contexts/menuContext";
+import { useRouter } from "next/router";
 
 export const menuItems = [
   { name: "Accueil", link: "/" },
+  { name: "Qui suis-je ?", link: "/presentation" },
   { name: "Prestations", link: "/prestations" },
   { name: "Me contacter", link: "/contact" },
 ];
 
-const Navbar = ({ menu, setMenu }: NavbarProps) => {
+const Navbar = () => {
+  const { menu, setMenu } = useContext(MenuContext);
+  const router = useRouter();
+
+  const setActiveMenu = () => {
+    const routePath = router.route.split("/")[1];
+
+    if (menu === "") setMenu("/");
+    if (menu && routePath !== menu) setMenu(routePath || "/");
+  };
+
+  useEffect(() => {
+    setActiveMenu();
+  }, []);
+
   return (
     <nav className={styles.navContainer}>
       {menuItems.map((item) => (

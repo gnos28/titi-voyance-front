@@ -4,38 +4,18 @@
   background-color: black;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
-}
-
-$background-width: 40%;
-
-.sideBackground {
-  position: relative;
-  width: $background-width;
   height: calc(100vh - $header-height - $navbar-height);
-  user-select: none;
 
-  & img {
-    object-fit: cover;
+  & > div {
+    user-select: none;
+    & > h2 {
+      margin-left: 15%;
+      width: 70%;
+      color: white;
+      text-align: center;
+    }
   }
-
-  .backgroundShadow {
-    position: absolute;
-    right: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
-    height: 100%;
-    width: 30%;
-  }
-}
-
-.sideContent {
-  position: relative;
-  width: calc(100% - $background-width);
-  min-height: calc(100vh - $header-height - $navbar-height);
-  background-color: black;
-  padding: 10px;
-  padding-right: 30px;
-  color: $background-superlight;
 }

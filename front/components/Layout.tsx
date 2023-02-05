@@ -1,14 +1,13 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
 import Header from "./Header";
 import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
-import { useRouter } from "next/router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   PayPalScriptProvider,
   ScriptProviderProps,
 } from "@paypal/react-paypal-js";
-import Head from "next/head";
+import { MenuContextProvider } from "../contexts/menuContext";
 
 type Children = { children: ReactNode };
 
@@ -26,27 +25,17 @@ const initialOptions: ScriptProviderProps["options"] = {
 };
 
 export default function Layout({ children }: Children) {
-  const [menu, setMenu] = useState<string>("/");
-  const router = useRouter();
-
-  const setActiveMenu = () => {
-    const routePath = router.route.split("/")[1];
-    if (routePath !== menu) setMenu(routePath || "/");
-  };
-
-  useEffect(() => {
-    setActiveMenu();
-  }, []);
-
   return (
-    <PayPalScriptProvider options={initialOptions}>
-      <ThemeProvider theme={darkTheme}>
-        <Header />
-        <Navbar menu={menu} setMenu={setMenu} />
-        <div className={styles.container}>
-          <div className={styles.mainContainer}>{children}</div>
-        </div>
-      </ThemeProvider>{" "}
-    </PayPalScriptProvider>
+    <MenuContextProvider>
+      <PayPalScriptProvider options={initialOptions}>
+        <ThemeProvider theme={darkTheme}>
+          <Header />
+          <Navbar />
+          <div className={styles.container}>
+            <div className={styles.mainContainer}>{children}</div>
+          </div>
+        </ThemeProvider>{" "}
+      </PayPalScriptProvider>
+    </MenuContextProvider>
   );
 }

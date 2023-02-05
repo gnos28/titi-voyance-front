@@ -13,6 +13,7 @@ RUN npm install sharp
 ENV NODE_ENV=production
 COPY api /front/api
 COPY components /front/components
+COPY contexts /front/contexts
 COPY data /front/data
 COPY pages /front/pages
 COPY public /front/public
@@ -33,6 +34,7 @@ ENV NODE_ENV=development
 RUN npm install
 COPY api /front/api
 COPY components /front/components
+COPY contexts /front/contexts
 COPY data /front/data
 COPY pages /front/pages
 COPY public /front/public
