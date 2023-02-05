@@ -137,7 +137,7 @@ const Prestation_details: NextPageWithLayout = () => {
           {
             amount: {
               // currency_code: "EUR",
-              value: "1",
+              value: prestation.price.toString(),
             },
           },
         ],
