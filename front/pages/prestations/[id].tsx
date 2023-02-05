@@ -41,6 +41,7 @@ const Prestation_details: NextPageWithLayout = () => {
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
   )[0];
+  
   dayjs.locale("fr");
 
   const getBookedSlots = async () => {
