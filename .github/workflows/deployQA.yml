@@ -36,7 +36,7 @@ jobs:
           ls -al
           echo '${{secrets.DOT_ENV_BACK}}' > .env.backend
           ls -al
-          echo '${{secrets.AUTH_JSON}}' > auth.json
+          printf '%s\n' "${{secrets.AUTH_JSON}}" > auth.json
           ls -al
 
       - name: checkout
