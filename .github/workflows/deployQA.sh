@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # prune docker
-docker stop $(docker ps --filter status=running --filter name=placement -q)
+docker stop $(docker ps --filter status=running --filter name=titi-voyance -q)
 docker rm -f $(docker ps --filter status=exited -q)
 docker rmi -f $(docker images titi-voyance* -q)
 docker image prune -f
@@ -22,7 +22,7 @@ mv ../dotenv/auth.json back/auth.json
 docker compose -f docker-compose.prod.yml build --no-cache
 
 # delete old folder
-rm -Rf ../oldTiti-voyance/
+sudo rm -Rf ~/oldTiti-voyance/
 
 # start new containers !
 docker compose -f docker-compose.prod.yml up >~/logs/log.compose.$(date +"%s") 2>&1 &
