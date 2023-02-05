@@ -62,7 +62,7 @@ const PersonalInfosInput = ({
       <div className={genericStyles.infoContainer}>
         <div>
           <TextField
-            id="outlined-basic"
+            id="nom"
             label="Nom"
             variant="outlined"
             required
@@ -71,7 +71,7 @@ const PersonalInfosInput = ({
             error={errors.map((err) => err.type).includes("nom")}
           />
           <TextField
-            id="outlined-basic"
+            id="prenom"
             label="Prénom"
             variant="outlined"
             required
@@ -80,7 +80,7 @@ const PersonalInfosInput = ({
             error={errors.map((err) => err.type).includes("prenom")}
           />
           <TextField
-            id="outlined-basic"
+            id="email"
             label="Email"
             variant="outlined"
             type="email"
@@ -96,6 +96,7 @@ const PersonalInfosInput = ({
               <TextField
                 {...params}
                 required
+                id="date de naissance"
                 error={errors.map((err) => err.type).includes("birthdate")}
               />
             )}
@@ -105,7 +106,7 @@ const PersonalInfosInput = ({
         </div>
         <div className={genericStyles.maxWidth}>
           <TextField
-            id="outlined-basic"
+            id="information complementaires"
             label="Informations complétementaires sur le tirage demandé"
             variant="outlined"
             multiline

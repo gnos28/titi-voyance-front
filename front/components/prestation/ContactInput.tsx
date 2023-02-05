@@ -53,7 +53,7 @@ const ContactInput = ({
         <div>
           <PhoneInTalkIcon sx={{ fontSize: 40 }} />
           <TextField
-            id="outlined-basic"
+            id="telephone"
             label="Téléphone"
             variant="outlined"
             onChange={(newValue) => handleContactChange(newValue, "telephone")}
@@ -64,7 +64,7 @@ const ContactInput = ({
         <div>
           <InstagramIcon sx={{ fontSize: 40 }} />
           <TextField
-            id="outlined-basic"
+            id="instagram"
             label="Instagram"
             variant="outlined"
             onChange={(newValue) => handleContactChange(newValue, "instagram")}
@@ -75,7 +75,7 @@ const ContactInput = ({
         <div>
           <WhatsAppIcon sx={{ fontSize: 40 }} />
           <TextField
-            id="outlined-basic"
+            id="whatsapp"
             label="WhatsApp"
             variant="outlined"
             onChange={(newValue) => handleContactChange(newValue, "whatsapp")}
