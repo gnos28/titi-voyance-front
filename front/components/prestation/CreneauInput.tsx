@@ -15,11 +15,11 @@ type CreneauInputProps = {
   errors: ErrorMessage[];
 };
 
-const hourList = Array(20)
+const hourList = Array(22)
   .fill(undefined)
   .map(
     (_, index) =>
-      `${(Math.floor(index / 2) + 9).toString().padStart(2, "0")}:${
+      `${(Math.floor(index / 2) + 11).toString().padStart(2, "0")}:${
         index % 2 ? "30" : "00"
       }`
   );
@@ -32,7 +32,26 @@ const CreneauInput = ({
   setHour,
   errors,
 }: CreneauInputProps) => {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const currentDay = today.getDate();
+  const currentHour = today.getHours();
+
   const isDisabled = (h: string) => {
+    if (date) {
+      const hHour = parseInt(h.split(":")[0], 10);
+
+      if (
+        date.getFullYear() === currentYear &&
+        date.getMonth() === currentMonth &&
+        date.getDate() === currentDay &&
+        hHour <= currentHour + 3
+      ) {
+        return true;
+      }
+    }
+
     return dayBookedSlots.includes(h);
   };
 
@@ -73,6 +92,7 @@ const CreneauInput = ({
         <div>
           <StaticDatePicker
             displayStaticWrapperAs="desktop"
+            disablePast
             label="Week picker"
             value={date}
             onChange={handleDateChange}

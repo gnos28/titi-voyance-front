@@ -38,4 +38,14 @@ export const prestations_list = [
       "Ce soin est un allié parfait si tu souhaites :\n- Equilibrer les chakras\n- Accélerer les dons spirituels\n- Equilibrer les énergies subtiles du corps\n- Elargir le champ d'énergie ou vibratoire\n- Guérir les déséquilibres\n- Soulager le stress et la douleur\n- Activer le corps de lumière\n- Stimuler le système immunitaire\n- Activer les systèmes énergétiques\n- Permettre un bien-être général",
     duration: 30,
   },
+  {
+    name: "Désenvoutement et Protection",
+    description: "Se libérer du mal",
+    price: 50,
+    background: "/card4.webp",
+    link: "desenvoutement",
+    description_long:
+      "Tu es victime d'attaques de forces, entités ou énergies négatives ?\nTu enchaines les difficultés dans divers domaines ?\nIl est temps de te libérer.\nCe nettoyage puissant aura comme effet dans ta vie :\n- Augmentation du taux vibratoire\n- Augmentation de ta chance en général\n- Moins de blocages\n- Meilleur état psychique\n- Augmentation de ton système immunitaire\n- Moins d'anxiété, plus de confiance en soi",
+    duration: 60,
+  },
 ];
