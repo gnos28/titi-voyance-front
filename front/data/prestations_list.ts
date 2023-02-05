@@ -21,7 +21,7 @@ export const prestations_list = [
   },
   {
     name: "Guidance Générale",
-    description: "Eclairage multi-thèmes",
+    description: "Eclairage multi-thèmatiques",
     price: 20,
     background: "/cards/card01.webp",
     link: "guidance-generale",
@@ -31,11 +31,11 @@ export const prestations_list = [
   },
   {
     name: "Lacher prise",
-    description: "Réussir à faire la part des choses",
+    description: "Faire la part des choses",
     price: 20,
     background: "/cards/card10.webp",
     link: "lacher-prise",
-    description_long: "Réussir à faire la part des choses",
+    description_long: "Faire la part des choses",
     duration: 30,
   },
   {
