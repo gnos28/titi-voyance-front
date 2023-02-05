@@ -1,10 +1,10 @@
 import { ListItemButton, ListItemText, TextField } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import React, { BaseSyntheticEvent } from "react";
-import genericStyles from "../../styles/Prestation_details.module.scss";
-import styles from "./CreneauInput.module.scss";
 import dayjs from "dayjs";
 import { ErrorMessage } from "../../pages/prestations/[id]";
+import genericStyles from "../../styles/Prestation_details.module.scss";
+import styles from "./CreneauInput.module.scss";
 
 type CreneauInputProps = {
   dayBookedSlots: string[];

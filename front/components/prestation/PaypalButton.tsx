@@ -4,8 +4,9 @@ import {
   PayPalButtonsComponentProps,
 } from "@paypal/react-paypal-js";
 import { paypalAPI } from "../../api/paypal";
-import styles from "./PaypalButton.module.scss";
 import { ErrorMessage } from "../../pages/prestations/[id]";
+import genericStyles from "../../styles/Prestation_details.module.scss";
+import styles from "./PaypalButton.module.scss";
 
 type PaypalButtonProps = {
   prestation: {

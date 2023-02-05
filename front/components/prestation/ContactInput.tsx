@@ -1,10 +1,11 @@
 import React from "react";
-import genericStyles from "../../styles/Prestation_details.module.scss";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { TextField } from "@mui/material";
 import { ErrorMessage } from "../../pages/prestations/[id]";
+import genericStyles from "../../styles/Prestation_details.module.scss";
+import styles from "./ContactInput.module.scss";
 
 type ContactInputProps = {
   telephone: string;

@@ -2,6 +2,7 @@ import React from "react";
 import Prestation from "../Prestation";
 //@ts-ignore
 import Card from "react-animated-3d-card";
+import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./PrestationHero.module.scss";
 
 type PrestationHeroProps = {
