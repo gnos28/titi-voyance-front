@@ -6,6 +6,11 @@ import styles from "../styles/Presentation.module.scss";
 import Image from "next/image";
 
 const Home: NextPageWithLayout = () => {
+  const age = (
+    (new Date().getTime() - new Date(1985, 8, 27).getTime()) /
+    (365 * 24 * 60 * 60 * 1000)
+  ).toFixed(0);
+
   return (
     <>
       <Head>
@@ -27,8 +32,8 @@ const Home: NextPageWithLayout = () => {
         <section className={styles.sideContent}>
           <h2 className={styles.title}>Qui suis-je ?</h2>
           <p>
-            Bonjour, Je suis Tiphaine, j'ai 37 ans et depuis mon plus jeune âge,
-            la spiritualité et le paranormal font partie de ma vie.
+            Bonjour, Je suis Tiphaine, j'ai {age} ans et depuis mon plus jeune
+            âge, la spiritualité et le paranormal font partie de ma vie.
           </p>
           <p>
             Je vous propose mes services en cartomancie et en soin énergétique à
@@ -45,7 +50,7 @@ const Home: NextPageWithLayout = () => {
             sentiments.
           </p>
           <p>
-            Plus de 25 ans d'expérience dans le domaine de la cartomancie, c'est
+            Plus de 20 ans d'expérience dans le domaine de la cartomancie, c'est
             un don familial. Voyance claire & précise, uniquement sur
             rendez-vous, avec l'assurance d'une complète confidentialité.
           </p>
