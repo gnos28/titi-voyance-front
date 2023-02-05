@@ -53,7 +53,7 @@
 
   & article {
     width: min(400px, calc((100vw - 30px) / 2 - 30px));
-    height: calc(min(400px, calc((100vw - 30px) / 2 - 30px)) / 0.6);
+    height: calc(min(400px, calc((100vw - 30px) / 2 - 30px)) / 0.662);
     position: relative;
   }
 
@@ -81,7 +81,7 @@
 
     & article {
       width: min(350px, calc((80vw - 40px) / 2 - 40px));
-      height: calc(min(350px, calc((80vw - 40px) / 2 - 40px)) / 0.6);
+      height: calc(min(350px, calc((80vw - 40px) / 2 - 40px)) / 0.662);
     }
   }
 }
@@ -96,7 +96,7 @@
 
     & article {
       width: min(300px, calc((80vw - 60px) / 3 - 40px));
-      height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.6);
+      height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.662);
     }
   }
 }
@@ -111,7 +111,7 @@
 
     & article {
       width: min(220px, calc((80vw - 80px) / 4 - 40px));
-      height: calc(min(220px, calc((80vw - 80px) / 4 - 40px)) / 0.6);
+      height: calc(min(220px, calc((80vw - 80px) / 4 - 40px)) / 0.662);
     }
   }
 }
