@@ -21,8 +21,9 @@ ENV NODE_ENV=development
 RUN npm install -g nodemon && npm install
 COPY ./src /back/src
 COPY .env /back/
-COPY .auth.json /back/
+COPY auth.json /back/
 COPY tsconfig.json /back/
+COPY tsconfig.build.json /back/
 CMD ["nodemon", "src/index.js"]
 
 # WORKDIR /src

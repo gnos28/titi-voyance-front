@@ -8,6 +8,9 @@ import Image from "next/image";
 const Home: NextPageWithLayout = () => {
   return (
     <>
+      <Head>
+        <title>Les cartes de titiphe</title>
+      </Head>
       <main className={styles.main}>
         <aside className={styles.sideBackground}>
           <Image
@@ -17,7 +20,7 @@ const Home: NextPageWithLayout = () => {
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-            // priority
+            priority
           ></Image>
           <div className={styles.backgroundShadow}></div>
         </aside>

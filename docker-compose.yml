@@ -23,7 +23,12 @@ services:
       context: ./front/
       target: dev
     volumes:
-      - ./front:/app
+      - ./front/api:/front/api
+      - ./front/components:/front/components
+      - ./front/data:/front/data
+      - ./front/pages:/front/pages
+      - ./front/public:/front/public
+      - ./front/styles:/front/styles
     command: npm run dev
     ports:
       - "3000:3000"

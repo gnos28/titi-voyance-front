@@ -8,6 +8,7 @@ import {
   PayPalScriptProvider,
   ScriptProviderProps,
 } from "@paypal/react-paypal-js";
+import Head from "next/head";
 
 type Children = { children: ReactNode };
 

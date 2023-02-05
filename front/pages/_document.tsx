@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
-        <title>Les cartes de titiphe</title>
         <meta
           name="description"
           content="Les cartes de titiphe, voyance et cartomancie"
