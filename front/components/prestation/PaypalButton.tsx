@@ -64,7 +64,7 @@ const PaypalButton = ({
     if (!actionsOrder) return new Promise((resolve) => resolve());
 
     return actionsOrder.capture().then(async (details) => {
-      console.log("details", details);
+      // console.log("details", details);
 
       const { create_time, id, status } = details;
 
@@ -110,7 +110,7 @@ const PaypalButton = ({
 
         await paypalAPI.storePaypal(purchasingData);
 
-        console.log("purchasingData", purchasingData);
+        // console.log("purchasingData", purchasingData);
       }
     });
   };
