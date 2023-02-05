@@ -10,14 +10,24 @@ export const prestations_list = [
     duration: 10,
   },
   {
+    name: "Tirage Général",
+    description: "Plusieurs questions",
+    price: 10,
+    background: "/card2.webp",
+    link: "tirage-general",
+    description_long:
+      "Je vous éclaire sur votre avenir de manière générale avec plusieur oracles ou tarôts sur les thèmes suivants :\n- Sentimental\n- Travail / Finance\n- Relationnel / Familial\n\nLa guidance peut se faire de 3 façons :\n- Par téléphone, je vous appellerai selon le créneau fixé (me fournir votre numéro de téléphone)\n- Par instagram (me fournir votre pseudo instagram)\n- Par whatsapp, je vous appellerai selon le créneau fixé (me fournir votre numéro de téléphone)",
+    duration: 30,
+  },
+  {
     name: "Guidance Générale",
     description: "Eclairage multi-thèmes",
-    price: 10,
+    price: 20,
     background: "/card2.webp",
     link: "guidance-generale",
     description_long:
       "Je vous éclaire sur votre avenir de manière générale avec plusieur oracles ou tarôts sur les thèmes suivants :\n- Sentimental\n- Travail / Finance\n- Relationnel / Familial\n\nLa guidance peut se faire de 3 façons :\n- Par téléphone, je vous appellerai selon le créneau fixé (me fournir votre numéro de téléphone)\n- Par instagram (me fournir votre pseudo instagram)\n- Par whatsapp, je vous appellerai selon le créneau fixé (me fournir votre numéro de téléphone)",
-    duration: 30,
+    duration: 60,
   },
   {
     name: "Lacher prise",
@@ -44,6 +54,16 @@ export const prestations_list = [
     price: 50,
     background: "/card4.webp",
     link: "desenvoutement",
+    description_long:
+      "Tu es victime d'attaques de forces, entités ou énergies négatives ?\nTu enchaines les difficultés dans divers domaines ?\nIl est temps de te libérer.\nCe nettoyage puissant aura comme effet dans ta vie :\n- Augmentation du taux vibratoire\n- Augmentation de ta chance en général\n- Moins de blocages\n- Meilleur état psychique\n- Augmentation de ton système immunitaire\n- Moins d'anxiété, plus de confiance en soi",
+    duration: 60,
+  },
+  {
+    name: "Séance de Spiritisme",
+    description: "Message aux défunts",
+    price: 50,
+    background: "/card4.webp",
+    link: "spiritisme",
     description_long:
       "Tu es victime d'attaques de forces, entités ou énergies négatives ?\nTu enchaines les difficultés dans divers domaines ?\nIl est temps de te libérer.\nCe nettoyage puissant aura comme effet dans ta vie :\n- Augmentation du taux vibratoire\n- Augmentation de ta chance en général\n- Moins de blocages\n- Meilleur état psychique\n- Augmentation de ton système immunitaire\n- Moins d'anxiété, plus de confiance en soi",
     duration: 60,

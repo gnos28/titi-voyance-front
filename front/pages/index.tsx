@@ -24,7 +24,6 @@ const Home: NextPageWithLayout = () => {
               sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-              priority
               width={500}
               height={500}
               draggable={false}

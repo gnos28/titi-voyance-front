@@ -24,7 +24,6 @@ const Contact: NextPageWithLayout = () => {
                 sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-                priority
                 width={200}
                 height={200}
                 draggable={false}

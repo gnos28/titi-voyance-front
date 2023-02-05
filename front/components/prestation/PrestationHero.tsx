@@ -38,8 +38,8 @@ const PrestationHero = ({ prestation }: PrestationHeroProps) => {
 
         <div className={styles.descriptionTextContainer}>
           <div>
-            {prestation.description_long.split("\n").map((line) => (
-              <p>{line}</p>
+            {prestation.description_long.split("\n").map((line, lineIndex) => (
+              <p key={lineIndex}>{line}</p>
             ))}
           </div>
           <div className={styles.priceDurationInfo}>

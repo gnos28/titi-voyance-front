@@ -18,8 +18,8 @@ const Navbar = () => {
   const setActiveMenu = () => {
     const routePath = router.route.split("/")[1];
 
-    if (menu === "") setMenu("/");
-    if (menu && routePath !== menu) setMenu(routePath || "/");
+    if (menu === "" && routePath === "") setMenu("/");
+    if (routePath !== menu) setMenu("/" + routePath || "/");
   };
 
   useEffect(() => {
