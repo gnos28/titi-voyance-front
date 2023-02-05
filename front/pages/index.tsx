@@ -29,7 +29,11 @@ const Home: NextPageWithLayout = () => {
               draggable={false}
             />
           </Link>
-          <h2>Voyance, Cartomancie, Soins energétiques, ...</h2>
+          <h2>
+            Voyance, Cartomancie
+            <br />
+            Soins energétiques
+          </h2>
         </div>
       </main>
     </>

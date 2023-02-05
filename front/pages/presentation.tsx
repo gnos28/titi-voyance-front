@@ -31,27 +31,25 @@ const Home: NextPageWithLayout = () => {
         <section className={styles.sideContent}>
           <h2 className={styles.title}>Qui suis-je ?</h2>
           <p>
-            Bonjour, Je suis Tiphaine, j'ai {age} ans et depuis mon plus jeune
-            âge, la spiritualité et le paranormal font partie de ma vie.
+            Je suis Tiphaine, une cartomancienne et praticienne en soins
+            énergétiques à distance avec plus de 20 ans d'expérience. Agée de{" "}
+            {age} ans, la spiritualité et le paranormal font partie intégrante
+            de ma vie depuis mon plus jeune âge.
           </p>
           <p>
-            Je vous propose mes services en cartomancie et en soin énergétique à
-            distance.
+            Je vous offre mes dons en cartomancie pour vous aider à éclairer
+            votre chemin de vie. Grâce à ma clairvoyance et à mes ressentis, je
+            capte les énergies, les sentiments et les états d'esprit pour vous
+            fournir une voyance claire et précise. C'est un don familial que je
+            partage avec vous en toute confidentialité, uniquement sur
+            rendez-vous.
           </p>
           <p>
-            Lors des tirages de cartes, j'utilise mes ressentis et ma
-            clairvoyance afin de vous aider et vous éclairer au maximum dans
-            votre chemin de vie.
-          </p>
-          <p>
-            J'ai naturellement cette connection du cœur, je ressens les énergies
-            positives ou négatives. Je capte les états d'esprits et les
-            sentiments.
-          </p>
-          <p>
-            Plus de 20 ans d'expérience dans le domaine de la cartomancie, c'est
-            un don familial. Voyance claire & précise, uniquement sur
-            rendez-vous, avec l'assurance d'une complète confidentialité.
+            Rejoignez-moi pour une expérience spirituelle enrichissante, je suis
+            là pour vous aider à explorer votre avenir et à comprendre votre
+            chemin de vie. Vous pouvez également me retrouver en direct sur
+            TikTok chaque soir de la semaine pour des lectures de cartes en
+            direct et une session de questions-réponses."
           </p>
         </section>
       </main>
