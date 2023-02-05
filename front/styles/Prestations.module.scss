@@ -9,6 +9,36 @@
   padding: 40px 30px;
 }
 
+@keyframes zoomOut {
+  0% {
+    filter: opacity(1);
+    transform: scale(1);
+  }
+  100% {
+    filter: opacity(0);
+    transform: scale(0);
+  }
+}
+
+.animateOut {
+  animation: zoomOut ease-in 0.5s both;
+}
+
+@keyframes zoomIn {
+  0% {
+    filter: opacity(1);
+    transform: scale(1);
+  }
+  100% {
+    filter: opacity(0);
+    transform: scale(5);
+  }
+}
+
+.animateIn {
+  animation: zoomIn ease-in 0.5s both;
+}
+
 .articlesContainer {
   padding: 40px 20px;
   display: grid;
@@ -38,36 +68,6 @@
 
 .articlesContainer > div > div > div {
   box-shadow: $background-dark 0px 0px 15px;
-}
-
-@keyframes zoomOut {
-  0% {
-    filter: opacity(1);
-    transform: scale(1);
-  }
-  100% {
-    filter: opacity(0);
-    transform: scale(0);
-  }
-}
-
-.animateOut {
-  animation: zoomOut ease-in 0.5s both;
-}
-
-@keyframes zoomIn {
-  0% {
-    filter: opacity(1);
-    transform: scale(1);
-  }
-  100% {
-    filter: opacity(0);
-    transform: scale(5);
-  }
-}
-
-.animateIn {
-  animation: zoomIn ease-in 0.5s both;
 }
 
 @media screen and (min-width: 750px) {

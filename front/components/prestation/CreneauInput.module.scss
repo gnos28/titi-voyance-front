@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+
+.dateTimeContainer {
+  height: 345px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 5px;
+
+  .hourSelectionContainer {
+    overflow: auto;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-grow: 0;
+  }
+}
+
+.creneauWarning {
+  border: 1px solid red;
+}
