@@ -1,7 +1,17 @@
 @import "../../styles/variables.scss";
 
-.warning {
-  margin-left: 20px;
-  color: rgb(251, 149, 149);
-  font-weight: bold;
+.paypalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    width: 300px;
+    height: auto;
+  }
+  .warning {
+    margin-left: 20px;
+    color: rgb(251, 149, 149);
+    font-weight: bold;
+  }
 }

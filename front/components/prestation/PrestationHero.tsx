@@ -36,13 +36,17 @@ const PrestationHero = ({ prestation }: PrestationHeroProps) => {
           </Card>
         </div>
 
-        <div>
-          {prestation.description_long.split("\n").map((line) => (
-            <p>{line}</p>
-          ))}
-          <p className={styles.priceDurationInfo}>
-            {prestation.price} € pour {prestation.duration} minutes
-          </p>
+        <div className={styles.descriptionTextContainer}>
+          <div>
+            {prestation.description_long.split("\n").map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+          <div className={styles.priceDurationInfo}>
+            <span>
+              {prestation.price} € / {prestation.duration} minutes
+            </span>
+          </div>
         </div>
       </div>
     </>

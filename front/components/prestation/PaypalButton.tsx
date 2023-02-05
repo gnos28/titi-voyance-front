@@ -118,19 +118,21 @@ const PaypalButton = ({
   return (
     <>
       <h3>4. Je paye la prestation via paypal</h3>
-      {errors.length === 0 ? (
-        <PayPalButtons
-          style={{ layout: "horizontal" }}
-          createOrder={handleCreateOrder}
-          onApprove={handleApprove}
-        />
-      ) : (
-        <div className={styles.warning}>
-          {errors.map((message) => (
-            <p key={message.type}>- {message.content}</p>
-          ))}
-        </div>
-      )}
+      <div className={styles.paypalContainer}>
+        {errors.length === 0 ? (
+          <PayPalButtons
+            style={{ layout: "horizontal" }}
+            createOrder={handleCreateOrder}
+            onApprove={handleApprove}
+          />
+        ) : (
+          <div className={styles.warning}>
+            {errors.map((message) => (
+              <p key={message.type}>- {message.content}</p>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };
