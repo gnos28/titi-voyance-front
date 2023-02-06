@@ -1,5 +1,48 @@
 @import "../../styles/variables.scss";
 
+.interactiveTitle {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -30px -30px 0;
+  padding: 6px;
+  text-align: center;
+  background-color: $background-base;
+  color: black;
+  font-size: 32px;
+  z-index: 1;
+  user-select: none;
+
+  & > div {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    & a {
+      color: $background-light;
+      cursor: pointer;
+      font-size: 16px;
+      transition: filter 0.2s ease-in-out;
+    }
+    & a:hover {
+      filter: opacity(0.5);
+    }
+  }
+
+  & > div:nth-child(1) {
+    width: 20%;
+    justify-content: flex-start;
+  }
+  & > div:nth-child(2) {
+    width: 50%;
+    justify-content: center;
+  }
+  & > div:nth-child(3) {
+    width: 20%;
+    justify-content: flex-end;
+  }
+}
+
 .prestationDescriptionContainer {
   display: flex;
   position: relative;
