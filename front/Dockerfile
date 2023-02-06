@@ -20,8 +20,10 @@ COPY public /front/public
 COPY styles /front/styles
 COPY tsconfig.json /front/
 COPY next.config.js /front/
+COPY next-sitemap.config.js /front/
 COPY .env.local /front/
 RUN npm run build
+RUN npm run postbuild
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 RUN chown -R nextjs:nodejs ./.next
