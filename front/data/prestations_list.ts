@@ -1,4 +1,14 @@
-export const prestations_list = [
+export type PrestationItem = {
+  name: string;
+  description: string;
+  price: number;
+  background: string;
+  link: string;
+  description_long: string;
+  duration: number;
+};
+
+export const prestations_list: PrestationItem[] = [
   {
     name: "Question simple",
     description: "Je réponds à votre question",
