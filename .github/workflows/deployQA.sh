@@ -11,7 +11,6 @@ mv titi-voyance/ oldTiti-voyance/
 git clone git@github.com:gnos28/titi-voyance.git
 cd titi-voyance/
 git pull -f --rebase origin dev
-mkdir bdd/sql-files
 
 # récupérer les .env uploadés précédemment avec scp et les déplacer ici
 mv ../dotenv/.env.frontend front/.env.local
