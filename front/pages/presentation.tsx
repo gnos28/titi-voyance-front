@@ -49,7 +49,7 @@ const Home: NextPageWithLayout = () => {
             là pour vous aider à explorer votre avenir et à comprendre votre
             chemin de vie. Vous pouvez également me retrouver en direct sur
             TikTok chaque soir de la semaine pour des lectures de cartes en
-            direct et une session de questions-réponses."
+            direct et une session de questions-réponses.
           </p>
         </section>
       </main>

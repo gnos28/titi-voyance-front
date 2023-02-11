@@ -39,18 +39,9 @@ $side-height-mobile: 18vh;
     100vh - $header-height-mobile - $navbar-height - $side-height-mobile
   );
   background-color: black;
-  padding: 10px;
-  padding-right: 30px;
+  padding: 10px 10px 30px 10px;
   color: $background-superlight;
-  line-height: 1.4;
-}
-
-@media screen and (min-width: 450px) {
-  .sideBackground {
-  }
-
-  .sideContent {
-  }
+  line-height: 1.45;
 }
 
 @media screen and (min-width: 550px) {
@@ -65,5 +56,6 @@ $side-height-mobile: 18vh;
   .sideContent {
     width: calc(100% - $background-width);
     min-height: calc(100vh - $header-height - $navbar-height);
+    padding: 10px 30px 10px 10px;
   }
 }
