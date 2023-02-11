@@ -37,6 +37,7 @@
     padding: 15px;
     transition: filter 0.3s ease-in-out;
     border-radius: 10px;
+    box-shadow: $background-dark 0px 0px 30px;
 
     & img {
       border-radius: 50%;
@@ -45,11 +46,20 @@
     .tiktokDescription {
       p {
         margin-left: 30px;
-        color: white;
+        color: $background-superlight;
         font-size: 25px;
       }
       p:first-child {
         font-size: 30px;
+      }
+
+      & img {
+        border-radius: 0;
+        margin-left: 30px;
+        margin-top: 30px;
+      }
+      & img:hover {
+        transform: scale(1);
       }
     }
   }

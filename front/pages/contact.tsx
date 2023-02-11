@@ -29,6 +29,16 @@ const Contact: NextPageWithLayout = () => {
                 draggable={false}
               />
               <div className={styles.tiktokDescription}>
+                <Image
+                  src="/TikTok_Logo.svg"
+                  alt="titiphe tiktok"
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+                  width={128.77815}
+                  height={31.308346}
+                  draggable={false}
+                />
                 <p>@titiphe.28</p>
                 <p>Les cartes de titiphe</p>
               </div>

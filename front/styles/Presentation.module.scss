@@ -25,10 +25,10 @@ $side-height-mobile: 18vh;
 
   .backgroundShadow {
     position: absolute;
-    right: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
-    height: 100%;
-    width: 30%;
+    bottom: 0;
+    background: linear-gradient(-180deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    height: 30%;
+    width: 100%;
   }
 }
 
@@ -44,6 +44,14 @@ $side-height-mobile: 18vh;
   line-height: 1.45;
 }
 
+@media screen and (min-width: 450px) {
+  .sideContent {
+    min-height: calc(
+      100vh - $header-height - $navbar-height - $side-height-mobile
+    );
+  }
+}
+
 @media screen and (min-width: 550px) {
   .main {
     flex-direction: row;
@@ -51,6 +59,16 @@ $side-height-mobile: 18vh;
   .sideBackground {
     width: $background-width;
     height: calc(100vh - $header-height - $navbar-height);
+
+    .backgroundShadow {
+      bottom: auto;
+      right: 0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+      height: 100%;
+      width: 30%;
+    }
+
+
   }
 
   .sideContent {
