@@ -1,7 +1,7 @@
 export const prestations_list = [
   {
     name: "Question simple",
-    description: "Je répond à votre question",
+    description: "Je réponds à votre question",
     price: 5,
     background: "/cards/card07.webp",
     link: "question-simple",
@@ -24,7 +24,7 @@ export const prestations_list = [
   },
   {
     name: "Guidance Générale",
-    description: "Eclairage multi-thèmatiques",
+    description: "Eclairage multi-thématiques",
     price: 20,
     background: "/cards/card01.webp",
     link: "guidance-generale",

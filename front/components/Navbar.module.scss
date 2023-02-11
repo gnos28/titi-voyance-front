@@ -2,20 +2,22 @@
 
 .navContainer {
   position: fixed;
-  top: $header-height;
+  top: $header-height-mobile;
   width: 100%;
   background-color: $background-dark;
   height: $navbar-height;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
   z-index: 1;
 
   & a {
+    margin-left: 5px;
+    margin-right: 5px;
     color: $font-color;
     text-transform: uppercase;
-    font-size: clamp(12px, 4vw, 24px);
+    font-size: 12px;
     transition: 0.3s ease-out all;
   }
 
@@ -27,5 +29,18 @@
 
   & .active {
     font-weight: bold;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .navContainer {
+    top: $header-height;
+    gap: 30px;
+
+    & a {
+      margin-left: 0px;
+      margin-right: 0px;
+      font-size: clamp(12px, 3vw, 24px);
+    }
   }
 }

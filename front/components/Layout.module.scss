@@ -2,9 +2,9 @@
 
 .container {
   position: fixed;
-  top: $header-height + $navbar-height;
+  top: $header-height-mobile + $navbar-height;
   width: 100%;
-  height: calc(100vh - $header-height - $navbar-height);
+  height: calc(100vh - $header-height-mobile - $navbar-height);
   overflow: hidden;
   overflow-y: auto;
 
@@ -16,7 +16,7 @@
 
   .mainContainer {
     width: 100%;
-    min-height: calc(100vh - $header-height - $navbar-height);
+    min-height: calc(100vh - $header-height-mobile - $navbar-height);
     background-color: black;
   }
 }
@@ -35,6 +35,17 @@
   background-repeat: repeat;
   background-position: 50% 0;
   background-size: auto;
+}
+
+@media screen and (min-width: 450px) {
+  .container {
+    top: $header-height + $navbar-height;
+    height: calc(100vh - $header-height - $navbar-height);
+
+    .mainContainer {
+      min-height: calc(100vh - $header-height - $navbar-height);
+    }
+  }
 }
 
 @media screen and (min-width: 750px) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -26,6 +26,9 @@ const ContactInput = ({
   setWhatsapp,
   errors,
 }: ContactInputProps) => {
+  const [contactContainerStyle, setContactContainerStyle] =
+    useState<React.CSSProperties>({});
+
   const handleContactChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     type: "telephone" | "instagram" | "whatsapp"
@@ -46,11 +49,22 @@ const ContactInput = ({
     if (type === "whatsapp") setWhatsapp(cleanedInput);
   };
 
+  useEffect(() => {
+    const { innerWidth } = window;
+
+    if (innerWidth < 650)
+      setContactContainerStyle({
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+      });
+  }, []);
+
   return (
     <>
       <h3>2. Je souhaite être contacté par</h3>
       <div className={genericStyles.infoContainer}>
-        <div>
+        <div style={contactContainerStyle}>
           <PhoneInTalkIcon sx={{ fontSize: 40 }} />
           <TextField
             id="telephone"
@@ -61,7 +75,7 @@ const ContactInput = ({
             error={errors.map((err) => err.type).includes("contact")}
           />
         </div>
-        <div>
+        <div style={contactContainerStyle}>
           <InstagramIcon sx={{ fontSize: 40 }} />
           <TextField
             id="instagram"
@@ -72,7 +86,7 @@ const ContactInput = ({
             error={errors.map((err) => err.type).includes("contact")}
           />
         </div>
-        <div>
+        <div style={contactContainerStyle}>
           <WhatsAppIcon sx={{ fontSize: 40 }} />
           <TextField
             id="whatsapp"

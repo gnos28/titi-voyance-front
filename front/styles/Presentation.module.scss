@@ -1,20 +1,22 @@
 @import "./variables.scss";
 
+$background-width-mobile: 100%;
+$background-width: 40%;
+$side-height-mobile: 18vh;
+
 .main {
   background-color: black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: relative;
 }
 
-$background-width: 40%;
-
 .sideBackground {
   position: relative;
-  width: $background-width;
-  height: calc(100vh - $header-height - $navbar-height);
+  width: $background-width-mobile;
+  height: $side-height-mobile;
   user-select: none;
 
   & img {
@@ -32,10 +34,36 @@ $background-width: 40%;
 
 .sideContent {
   position: relative;
-  width: calc(100% - $background-width);
-  min-height: calc(100vh - $header-height - $navbar-height);
+  width: 100%;
+  min-height: calc(
+    100vh - $header-height-mobile - $navbar-height - $side-height-mobile
+  );
   background-color: black;
   padding: 10px;
   padding-right: 30px;
   color: $background-superlight;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 450px) {
+  .sideBackground {
+  }
+
+  .sideContent {
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .main {
+    flex-direction: row;
+  }
+  .sideBackground {
+    width: $background-width;
+    height: calc(100vh - $header-height - $navbar-height);
+  }
+
+  .sideContent {
+    width: calc(100% - $background-width);
+    min-height: calc(100vh - $header-height - $navbar-height);
+  }
 }

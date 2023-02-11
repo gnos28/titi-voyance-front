@@ -1,5 +1,12 @@
 @import "./variables.scss";
 
+$card-ratio: 0.5862;
+// for mobile
+$available_height: calc(100vh - $header-height - $navbar-height - 60px);
+$card-raw-width: min(100vw, calc(100vh - $header-height - $navbar-height));
+$card-base-height: min($available_height, calc($card-raw-width / $card-ratio));
+$card-base-width: calc($card-base-height * $card-ratio);
+
 .main {
   width: 80%;
   max-width: 1100px;
@@ -40,21 +47,18 @@
 }
 
 .articlesContainer {
-  padding: 40px 20px;
-  display: grid;
-  grid-template-rows: auto;
-  justify-content: space-around;
-  grid-template-columns: repeat(
-    auto-fill,
-    min(400px, calc((100vw - 30px) / 2 - 30px))
-  );
-  gap: 30px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+  padding-bottom: 30px;
 
   & article {
-    width: min(400px, calc((100vw - 30px) / 2 - 30px));
-    height: calc(min(400px, calc((100vw - 30px) / 2 - 30px)) / 0.5862);
     position: relative;
+    width: $card-base-width;
+    height: $card-base-height;
   }
 
   & > div:hover div > div {
@@ -70,6 +74,27 @@
   box-shadow: $background-dark 0px 0px 15px;
 }
 
+@media screen and (min-width: 450px) {
+  .articlesContainer {
+    margin-top: 0px;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-rows: auto;
+    justify-content: space-around;
+
+    grid-template-columns: repeat(
+      auto-fill,
+      min(400px, calc((100vw - 30px) / 2 - 30px))
+    );
+    gap: 30px;
+
+    & article {
+      width: min(400px, calc((100vw - 30px) / 2 - 30px));
+      height: calc(min(400px, calc((100vw - 30px) / 2 - 30px)) / $card-ratio);
+    }
+  }
+}
+
 @media screen and (min-width: 750px) {
   .articlesContainer {
     padding: 40px 30px;
@@ -81,7 +106,7 @@
 
     & article {
       width: min(350px, calc((80vw - 40px) / 2 - 40px));
-      height: calc(min(350px, calc((80vw - 40px) / 2 - 40px)) / 0.5862);
+      height: calc(min(350px, calc((80vw - 40px) / 2 - 40px)) / $card-ratio);
     }
   }
 }
@@ -96,7 +121,7 @@
 
     & article {
       width: min(300px, calc((80vw - 60px) / 3 - 40px));
-      height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / 0.5862);
+      height: calc(min(300px, calc((80vw - 60px) / 3 - 40px)) / $card-ratio);
     }
   }
 }
@@ -111,7 +136,7 @@
 
     & article {
       width: min(220px, calc((80vw - 80px) / 4 - 40px));
-      height: calc(min(220px, calc((80vw - 80px) / 4 - 40px)) / 0.5862);
+      height: calc(min(220px, calc((80vw - 80px) / 4 - 40px)) / $card-ratio);
     }
   }
 }
