@@ -17,12 +17,19 @@ mv ../dotenv/.env.frontend front/.env.local
 mv ../dotenv/.env.backend back/.env
 mv ../dotenv/auth.json back/auth.json
 
-# build docker images
-docker compose -f docker-compose.prod.yml build --no-cache
+# build docker back images
+docker compose -f docker-compose.prod.yml build back --no-cache
+
+# start back container
+docker compose -f docker-compose.prod.yml up back >~/logs/log.compose.back.$(date +"%s") 2>&1 &
+disown
+
+# build docker front images
+docker compose -f docker-compose.prod.yml build front --no-cache
+
+# start front container
+docker compose -f docker-compose.prod.yml up front >~/logs/log.compose.front.$(date +"%s") 2>&1 &
+disown
 
 # delete old folder
 sudo rm -Rf ~/oldTiti-voyance/
-
-# start new containers !
-docker compose -f docker-compose.prod.yml up >~/logs/log.compose.$(date +"%s") 2>&1 &
-disown
