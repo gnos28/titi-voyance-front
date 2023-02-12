@@ -113,9 +113,11 @@ export async function getStaticProps() {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
+  const { ISR_REVALIDATION } = process.env;
+
   return {
     props: { prestations_list }, // will be passed to the page component as props
-    revalidate: 10,
+    revalidate: parseInt(ISR_REVALIDATION || "10", 10),
   };
 }
 
