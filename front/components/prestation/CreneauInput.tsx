@@ -96,7 +96,14 @@ const CreneauInput = ({
     return "";
   };
 
-  useEffect(() => {}, [date, hour]);
+  useEffect(() => {
+    if (date && hour) {
+      const daySlots = convertRawSlotsToDaySlots(monthBookedSlots, date);
+      if (isDisabled(hour, date, daySlots)) {
+        setHour(undefined);
+      }
+    }
+  }, [date, hour]);
 
   return (
     <>
