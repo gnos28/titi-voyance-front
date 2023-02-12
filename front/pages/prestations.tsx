@@ -115,6 +115,7 @@ export async function getStaticProps() {
 
   return {
     props: { prestations_list }, // will be passed to the page component as props
+    revalidate: 10,
   };
 }
 
