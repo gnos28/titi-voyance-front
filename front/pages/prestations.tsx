@@ -6,10 +6,17 @@ import styles from "../styles/Prestations.module.scss";
 import Prestation from "../components/Prestation";
 //@ts-ignore
 import Card from "react-animated-3d-card";
-import { PrestationItem, prestations_list } from "../data/prestations_list";
+// import { PrestationItem, prestations_list } from "../data/prestations_list";
 import { useRouter } from "next/router";
+import { PrestationItem, prestationsAPI } from "../api/prestations";
 
-const Prestations: NextPageWithLayout = () => {
+type PrestationsProps = {
+  prestations_list: PrestationItem[];
+};
+
+const Prestations: NextPageWithLayout<PrestationsProps> = ({
+  prestations_list,
+}) => {
   const [animateCard, setAnimateCard] = useState<string | undefined>(undefined);
   const [allowAnimation, setAllowAnimation] = useState<boolean>(true);
 
@@ -101,5 +108,14 @@ const Prestations: NextPageWithLayout = () => {
 Prestations.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export async function getStaticProps() {
+  const prestations_list =
+    (await prestationsAPI.getAll("ssr")).data?.prestations || [];
+
+  return {
+    props: { prestations_list }, // will be passed to the page component as props
+  };
+}
 
 export default Prestations;

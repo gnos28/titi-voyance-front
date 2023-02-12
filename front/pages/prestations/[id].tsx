@@ -4,7 +4,6 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import { NextPageWithLayout } from "../_app";
 import styles from "../../styles/Prestation_details.module.scss";
-import { prestations_list } from "../../data/prestations_list";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/fr";
@@ -15,10 +14,15 @@ import PersonalInfosInput from "../../components/prestation/PersonalInfosInput";
 import ContactInput from "../../components/prestation/ContactInput";
 import CreneauInput from "../../components/prestation/CreneauInput";
 import PaypalButton from "../../components/prestation/PaypalButton";
+import { PrestationItem, prestationsAPI } from "../../api/prestations";
 
 export type ErrorMessage = {
   type: "nom" | "prenom" | "birthdate" | "contact" | "creneau";
   content: string;
+};
+
+type Prestation_detailsProps = {
+  prestations_list: PrestationItem[];
 };
 
 export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
@@ -45,7 +49,9 @@ export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
     });
 };
 
-const Prestation_details: NextPageWithLayout = () => {
+const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
+  prestations_list,
+}) => {
   const router = useRouter();
   const { id } = router.query;
   const [date, setDate] = useState<Date | null>(new Date());
@@ -283,6 +289,9 @@ Prestation_details.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticPaths() {
+  const prestations_list =
+    (await prestationsAPI.getAll("ssr")).data?.prestations || [];
+
   const paths = prestations_list.map((prestation) => ({
     params: { id: prestation.link },
   }));
@@ -294,9 +303,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps() {
+  const prestations_list =
+    (await prestationsAPI.getAll("ssr")).data?.prestations || [];
+
   return {
-    // Passed to the page component as props
-    props: {},
+    props: { prestations_list }, // will be passed to the page component as props
+    revalidate: 10,
   };
 }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let fromBackUrl = "http://placement-back-1:5000";
+let fromBackUrl = "http://titivoyance-back-1:5000";
 let fromFrontUrl = "http://localhost:5000";
 
 if (process.env.NEXT_PUBLIC_BACKEND_URL !== undefined)
