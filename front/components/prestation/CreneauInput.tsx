@@ -1,13 +1,22 @@
-import { ListItemButton, ListItemText, TextField } from "@mui/material";
+import {
+  ListItemButton,
+  ListItemText,
+  TextField,
+  TextFieldProps,
+} from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
-import React, { BaseSyntheticEvent } from "react";
-import dayjs from "dayjs";
-import { ErrorMessage } from "../../pages/prestations/[id]";
+import React, { BaseSyntheticEvent, useEffect } from "react";
+import dayjs, { Dayjs } from "dayjs";
+import {
+  convertRawSlotsToDaySlots,
+  ErrorMessage,
+} from "../../pages/prestations/[id]";
 import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./CreneauInput.module.scss";
 
 type CreneauInputProps = {
   dayBookedSlots: string[];
+  monthBookedSlots: string[];
   date: Date | null;
   setDate: React.Dispatch<React.SetStateAction<Date | null>>;
   hour: string | undefined;
@@ -26,6 +35,7 @@ const hourList = Array(22)
 
 const CreneauInput = ({
   dayBookedSlots,
+  monthBookedSlots,
   date,
   setDate,
   hour,
@@ -38,21 +48,32 @@ const CreneauInput = ({
   const currentDay = today.getDate();
   const currentHour = today.getHours();
 
-  const isDisabled = (h: string) => {
-    if (date) {
+  const isDisabled = (h: string, forceDate?: Date, forceSlots?: string[]) => {
+    const dateToCheck = forceDate || date;
+    const slotsToCheck = forceSlots ? forceSlots : dayBookedSlots;
+
+    if (dateToCheck && !forceDate) {
       const hHour = parseInt(h.split(":")[0], 10);
 
       if (
-        date.getFullYear() === currentYear &&
-        date.getMonth() === currentMonth &&
-        date.getDate() === currentDay &&
+        dateToCheck.getFullYear() === currentYear &&
+        dateToCheck.getMonth() === currentMonth &&
+        dateToCheck.getDate() === currentDay &&
         hHour <= currentHour + 3
       ) {
         return true;
       }
     }
 
-    return dayBookedSlots.includes(h);
+    return slotsToCheck.includes(h);
+  };
+
+  const isDayDisabled = (day: Dayjs & { $d: Date }) => {
+    const daySlots = convertRawSlotsToDaySlots(monthBookedSlots, day["$d"]);
+
+    return hourList
+      .map((hour) => isDisabled(hour, day["$d"], daySlots))
+      .every((hour) => hour === true);
   };
 
   const handleDateChange = (newValue: dayjs.Dayjs | null) => {
@@ -75,6 +96,8 @@ const CreneauInput = ({
     return "";
   };
 
+  useEffect(() => {}, [date, hour]);
+
   return (
     <>
       <h3>
@@ -93,6 +116,7 @@ const CreneauInput = ({
           <StaticDatePicker
             displayStaticWrapperAs="desktop"
             disablePast
+            shouldDisableDate={isDayDisabled}
             label="Week picker"
             value={date}
             onChange={handleDateChange}

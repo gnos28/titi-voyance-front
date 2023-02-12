@@ -21,6 +21,30 @@ export type ErrorMessage = {
   content: string;
 };
 
+export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
+  return rawSlots
+    .filter((raw) => {
+      const rawDate = new Date(raw);
+      const rawYear = rawDate.getFullYear();
+      const rawMonth = rawDate.getMonth();
+      const rawDay = rawDate.getDate();
+
+      if (
+        date.getFullYear() === rawYear &&
+        date.getMonth() === rawMonth &&
+        date.getDate() === rawDay
+      )
+        return true;
+      return false;
+    })
+    .map((raw) => {
+      const rawDate = new Date(raw);
+      const rawHour = rawDate.getHours().toString().padStart(2, "0");
+      const rawMin = rawDate.getMinutes().toString().padStart(2, "0");
+      return `${rawHour}:${rawMin}`;
+    });
+};
+
 const Prestation_details: NextPageWithLayout = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -66,29 +90,7 @@ const Prestation_details: NextPageWithLayout = () => {
         previousDate.current = date;
       }
 
-      setDayBookedSlots(
-        rawSlots
-          .filter((raw) => {
-            const rawDate = new Date(raw);
-            const rawYear = rawDate.getFullYear();
-            const rawMonth = rawDate.getMonth();
-            const rawDay = rawDate.getDate();
-
-            if (
-              date.getFullYear() === rawYear &&
-              date.getMonth() === rawMonth &&
-              date.getDate() === rawDay
-            )
-              return true;
-            return false;
-          })
-          .map((raw) => {
-            const rawDate = new Date(raw);
-            const rawHour = rawDate.getHours().toString().padStart(2, "0");
-            const rawMin = rawDate.getMinutes().toString().padStart(2, "0");
-            return `${rawHour}:${rawMin}`;
-          })
-      );
+      setDayBookedSlots(convertRawSlotsToDaySlots(rawSlots, date));
     }
   };
 
@@ -249,6 +251,7 @@ const Prestation_details: NextPageWithLayout = () => {
               />
               <CreneauInput
                 dayBookedSlots={dayBookedSlots}
+                monthBookedSlots={monthBookedSlots}
                 date={date}
                 setDate={setDate}
                 hour={hour}
