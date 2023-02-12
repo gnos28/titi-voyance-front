@@ -10,7 +10,7 @@ type Data = {
 };
 
 export const importSheet = async (sheetId: string | undefined) => {
-  console.log("importSheet");
+  console.log("importSheet" + sheetId);
 
   const { GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY, EXPORT_SHEET_ID } =
     process.env;
@@ -42,8 +42,6 @@ export const importSheet = async (sheetId: string | undefined) => {
 
     const { headerValues } = sheet;
 
-    console.log("headerValues", headerValues);
-
     const datas = rows.map((row) => {
       const newObj: { [key: string]: string } = {};
 
@@ -51,8 +49,6 @@ export const importSheet = async (sheetId: string | undefined) => {
 
       return newObj;
     });
-
-    console.log("datas ", datas);
 
     return datas;
   }
