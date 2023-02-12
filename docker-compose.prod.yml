@@ -29,3 +29,7 @@ services:
 networks:
   dockerlan:
     driver: bridge
+
+build:
+    context: .
+    network: dockerlan
