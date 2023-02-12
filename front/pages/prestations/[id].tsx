@@ -15,6 +15,7 @@ import ContactInput from "../../components/prestation/ContactInput";
 import CreneauInput from "../../components/prestation/CreneauInput";
 import PaypalButton from "../../components/prestation/PaypalButton";
 import { PrestationItem, prestationsAPI } from "../../api/prestations";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 export type ErrorMessage = {
   type: "nom" | "prenom" | "birthdate" | "contact" | "creneau";
@@ -288,7 +289,7 @@ Prestation_details.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
@@ -300,9 +301,9 @@ export async function getStaticPaths() {
     paths,
     fallback: "blocking",
   };
-}
+};
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
@@ -316,6 +317,6 @@ export async function getStaticProps() {
     props: { prestations_list }, // will be passed to the page component as props
     revalidate,
   };
-}
+};
 
 export default Prestation_details;

@@ -9,6 +9,7 @@ import Card from "react-animated-3d-card";
 // import { PrestationItem, prestations_list } from "../data/prestations_list";
 import { useRouter } from "next/router";
 import { PrestationItem, prestationsAPI } from "../api/prestations";
+import { GetStaticProps } from "next";
 
 type PrestationsProps = {
   prestations_list: PrestationItem[];
@@ -109,7 +110,7 @@ Prestations.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
@@ -123,6 +124,6 @@ export async function getStaticProps() {
     props: { prestations_list }, // will be passed to the page component as props
     revalidate,
   };
-}
+};
 
 export default Prestations;
