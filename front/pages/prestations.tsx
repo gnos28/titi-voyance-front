@@ -115,9 +115,13 @@ export async function getStaticProps() {
 
   const { ISR_REVALIDATION } = process.env;
 
+  const revalidate = !prestations_list.length
+    ? 1
+    : parseInt(ISR_REVALIDATION || "10", 10);
+
   return {
     props: { prestations_list }, // will be passed to the page component as props
-    revalidate: parseInt(ISR_REVALIDATION || "10", 10),
+    revalidate,
   };
 }
 
