@@ -5,7 +5,7 @@ services:
       context: ./back/
       target: dev
     volumes:
-      - ./back:/src
+      - ./back/src:/back/src
     command: npm run start:dev
     ports:
       - "5000:5000"
