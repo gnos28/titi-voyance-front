@@ -41,7 +41,7 @@ const Prestation_details: NextPageWithLayout = () => {
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
   )[0];
-  
+
   dayjs.locale("fr");
 
   const getBookedSlots = async () => {
@@ -278,5 +278,23 @@ const Prestation_details: NextPageWithLayout = () => {
 Prestation_details.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export async function getStaticPaths() {
+  const paths = prestations_list.map((prestation) => ({
+    params: { id: prestation.link },
+  }));
+
+  return {
+    paths,
+    fallback: false, // can also be true or 'blocking'
+  };
+}
+
+export async function getStaticProps() {
+  return {
+    // Passed to the page component as props
+    props: {},
+  };
+}
 
 export default Prestation_details;
