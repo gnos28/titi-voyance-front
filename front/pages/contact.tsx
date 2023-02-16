@@ -45,7 +45,6 @@ const Contact: NextPageWithLayout = () => {
             </Link>
           </div>
           <h3>Du lundi au vendredi à partir de 22h</h3>
-          <h4>Questions gratuites de 22h à 00h, payantes après minuit</h4>
         </div>
       </main>
     </>
