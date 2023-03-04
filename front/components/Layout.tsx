@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
@@ -8,6 +8,7 @@ import {
   ScriptProviderProps,
 } from "@paypal/react-paypal-js";
 import { MenuContextProvider } from "../contexts/menuContext";
+import { useRouter } from "next/router";
 
 type Children = { children: ReactNode };
 
@@ -25,13 +26,25 @@ const initialOptions: ScriptProviderProps["options"] = {
 };
 
 export default function Layout({ children }: Children) {
+  const layoutContainer = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  let previousRoute = "";
+
+  useEffect(() => {
+    const currentRoute = router.route;
+    if (currentRoute !== previousRoute && layoutContainer.current) {
+      previousRoute = currentRoute;
+      layoutContainer.current.scrollTo({ top: 0 });
+    }
+  });
+
   return (
     <MenuContextProvider>
       <PayPalScriptProvider options={initialOptions}>
         <ThemeProvider theme={darkTheme}>
           <Header />
           <Navbar />
-          <div className={styles.container}>
+          <div className={styles.container} ref={layoutContainer}>
             <div className={styles.mainContainer}>{children}</div>
           </div>
         </ThemeProvider>{" "}
