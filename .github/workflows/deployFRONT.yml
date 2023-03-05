@@ -45,13 +45,13 @@ jobs:
       - name: scp bash script
         if: ${{ success() }}
         run: |
-          scp -r -p -o StrictHostKeyChecking=accept-new -i ~/.ssh/PROD_SSH.pem ubuntu@51.75.249.143 .github/workflows/deployQA.sh ubuntu@51.75.249.143:~ || echo
+          scp -r -p -o StrictHostKeyChecking=accept-new -i ~/.ssh/PROD_SSH.pem ubuntu@51.75.249.143 .github/workflows/deployFRONT.sh ubuntu@51.75.249.143:~ || echo
 
       - name: connect SSH & run deploy script
         if: ${{ success() }}
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ~/.ssh/PROD_SSH.pem ubuntu@51.75.249.143 /bin/bash -s << EOT
-          chmod +x ~/deployQA.sh
-          ~/deployQA.sh > ~/logs/log.deploy.front.$( date +"%s") 2>&1 & disown
+          chmod +x ~/deployFRONT.sh
+          ~/deployFRONT.sh > ~/logs/log.deploy.front.$( date +"%s") 2>&1 & disown
           exit
           EOT
