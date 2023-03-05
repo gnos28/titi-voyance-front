@@ -33,11 +33,6 @@ jobs:
           mkdir dotenv
           cd dotenv/
           echo '${{secrets.DOT_ENV_FRONT}}' > .env.frontend
-          ls -al
-          echo '${{secrets.DOT_ENV_BACK}}' > .env.backend
-          ls -al
-          echo '${{secrets.AUTH_JSON}}' > auth.json
-          ls -al
 
       - name: checkout
         uses: actions/checkout@v3
@@ -57,6 +52,6 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ~/.ssh/PROD_SSH.pem ubuntu@51.75.249.143 /bin/bash -s << EOT
           chmod +x ~/deployQA.sh
-          ~/deployQA.sh > ~/logs/log.deploy.$( date +"%s") 2>&1 & disown
+          ~/deployQA.sh > ~/logs/log.deploy.front.$( date +"%s") 2>&1 & disown
           exit
           EOT
