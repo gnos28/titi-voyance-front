@@ -60,7 +60,7 @@ const Prestations: NextPageWithLayout<PrestationsProps> = ({
         {allowAnimation ? (
           <Card onClick={onClick}>{getCard(prestation)}</Card>
         ) : (
-          <div onClick={onClick}>
+          <div onClick={onClick} className={styles.firefoxCardContainer}>
             <div>
               <div>{getCard(prestation)}</div>
             </div>

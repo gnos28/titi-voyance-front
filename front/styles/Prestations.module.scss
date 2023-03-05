@@ -7,6 +7,8 @@ $card-raw-width: min(100vw, calc(100vh - $header-height - $navbar-height));
 $card-base-height: min($available_height, calc($card-raw-width / $card-ratio));
 $card-base-width: calc($card-base-height * $card-ratio);
 
+$firefox-border-radius: 10px;
+
 .main {
   width: 80%;
   max-width: 1100px;
@@ -72,6 +74,29 @@ $card-base-width: calc($card-base-height * $card-ratio);
 
 .articlesContainer > div > div > div {
   box-shadow: $background-dark 0px 0px 15px;
+}
+
+.firefoxCardContainer {
+  cursor: pointer;
+  & > div {
+    border-radius: $firefox-border-radius;
+  }
+  & > div > div {
+    border-radius: $firefox-border-radius;
+  }
+  & > div > div > article {
+    border-radius: $firefox-border-radius;
+  }
+  & > div > div > article > div {
+    border-radius: $firefox-border-radius;
+  }
+  & > div > div > article > div > img {
+    border-radius: $firefox-border-radius;
+  }
+  & > div > div > article > div > h2 {
+    border-bottom-left-radius: $firefox-border-radius;
+    border-bottom-right-radius: $firefox-border-radius;
+  }
 }
 
 @media screen and (min-width: 450px) {
