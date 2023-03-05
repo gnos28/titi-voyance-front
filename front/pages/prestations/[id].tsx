@@ -308,7 +308,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async () => {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations ||
-    // (await prestationsAPI.getAll("build")).data?.prestations ||
+    (await prestationsAPI.getAll("build")).data?.prestations ||
     [];
 
   console.log("prestations_list", prestations_list.length);

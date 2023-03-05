@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # prune docker
-docker stop $(docker ps --filter status=running --filter name=titi-voyance-front -q)
+docker stop $(docker ps --filter status=running --filter name=front -q)
 docker rm -f $(docker ps --filter status=exited -q)
-docker rmi -f $(docker images titi-voyance-front* -q)
+docker rmi -f $(docker images front* -q)
 docker image prune -f
 
 # prepare new deployment folder

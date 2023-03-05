@@ -116,14 +116,14 @@ export const getStaticProps: GetStaticProps = async () => {
   //   (await prestationsAPI.getAll("ssr")).data
   // );
 
-  // console.log(
-  //   '(await prestationsAPI.getAll("build")).data',
-  //   (await prestationsAPI.getAll("build")).data
-  // );
+  console.log(
+    '(await prestationsAPI.getAll("build")).data',
+    (await prestationsAPI.getAll("build")).data
+  );
 
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations ||
-    // (await prestationsAPI.getAll("build")).data?.prestations ||
+    (await prestationsAPI.getAll("build")).data?.prestations ||
     [];
 
   console.log("prestations_list", prestations_list.length);
