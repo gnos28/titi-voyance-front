@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   front:
+    container_name: titifront
     build:
       context: ./front/
       target: dev
@@ -17,6 +18,8 @@ services:
       - "3000:3000"
     networks:
       - titinetwork
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: always
 
 networks:
