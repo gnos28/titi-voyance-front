@@ -6,7 +6,7 @@ services:
       context: ./front/
       target: production
       # network: host
-    command: npm run start
+    command: npm run prod
     ports:
       - "3000:3000"
     networks:

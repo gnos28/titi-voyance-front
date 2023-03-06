@@ -15,7 +15,7 @@ type GetAll = {
   data: { prestations: PrestationItem[] } | undefined;
 };
 
-type From = "csr" | "ssr" | "build";
+type From = "csr" | "ssr";
 
 export const prestationsAPI = {
   getAll: async (from: From): Promise<GetAll> => {

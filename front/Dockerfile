@@ -22,14 +22,15 @@ COPY tsconfig.json /front/
 COPY next.config.js /front/
 COPY next-sitemap.config.js /front/
 COPY .env.local /front/
-RUN npm run build
-RUN npm run postbuild
+# RUN npm run build
+# RUN npm run postbuild
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-RUN chown -R nextjs:nodejs ./.next
-USER nextjs
+# RUN chown -R nextjs:nodejs ./.next
+# USER nextjs
 ENV PORT 3000
-CMD ["next", "start"]
+# CMD ["next", "start"]
+CMD ["tail", "-f", "/dev/null"]
 
 FROM base as dev
 ENV NODE_ENV=development

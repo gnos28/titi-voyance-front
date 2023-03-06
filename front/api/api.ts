@@ -11,15 +11,10 @@ if (process.env.NEXT_PUBLIC_BACKEND_URL !== undefined)
 const withCredentials = fromFrontUrl.includes("localhost") ? false : true;
 if (!fromFrontUrl.includes("http")) fromFrontUrl = "http://" + fromFrontUrl;
 
-console.log("fromBackUrl", fromBackUrl);
-console.log("fromFrontUrl", fromFrontUrl);
+// console.log("fromBackUrl", fromBackUrl);
+// console.log("fromFrontUrl", fromFrontUrl);
 
 export const api = {
-  build: axios.create({
-    baseURL: `localhost:5000/api`,
-    // withCredentials,
-  }),
-
   ssr: axios.create({
     baseURL: `${fromBackUrl}/api`,
     // withCredentials,

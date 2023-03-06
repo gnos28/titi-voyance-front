@@ -293,8 +293,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const prestations_list =
     (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
-  console.log("prestations_list", prestations_list.length);
-
   const paths = prestations_list.map((prestation) => ({
     params: { id: prestation.link },
   }));
@@ -307,11 +305,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const prestations_list =
-    (await prestationsAPI.getAll("ssr")).data?.prestations ||
-    (await prestationsAPI.getAll("build")).data?.prestations ||
-    [];
-
-  console.log("prestations_list", prestations_list.length);
+    (await prestationsAPI.getAll("ssr")).data?.prestations || [];
 
   const { ISR_REVALIDATION } = process.env;
 

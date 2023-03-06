@@ -19,8 +19,15 @@ mv ../dotenv/.env.frontend front/.env.local
 docker compose -f docker-compose.prod.yml build --no-cache
 
 # start container
-docker compose -f docker-compose.prod.yml up >~/logs/log.compose.back.$(date +"%s") 2>&1 &
+docker compose -f docker-compose.prod.yml up >~/logs/log.compose.front.$(date +"%s") 2>&1 &
 disown
 
 # delete old folder
 sudo rm -Rf ~/oldTiti-voyance-front/
+
+# build next.js
+# docker exec -i $(docker ps --filter status=running --filter name=front -q) buildFRONT.sh >~/logs/log.build.front.$(date +"%s") 2>&1
+
+# build next.js
+# docker exec -i $(docker ps --filter status=running --filter name=front -q) next start >~/logs/log.build.front.$(date +"%s") 2>&1 &
+# disown
