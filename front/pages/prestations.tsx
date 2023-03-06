@@ -73,7 +73,9 @@ const Prestations: NextPageWithLayout<PrestationsProps> = ({
   useEffect(() => {
     setAnimateCard(undefined);
 
-    if (navigator.userAgent.match(/Firefox/i)) setAllowAnimation(false);
+    const _navigator = navigator as Navigator & { userAgentData?: unknown };
+
+    if (_navigator.userAgentData === undefined) setAllowAnimation(false);
   }, []);
 
   return (
