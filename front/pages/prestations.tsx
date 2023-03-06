@@ -81,7 +81,13 @@ const Prestations: NextPageWithLayout<PrestationsProps> = ({
   return (
     <>
       <Head>
-        <title>Les cartes de titiphe</title>
+        <title>Prestations - Les cartes de titiphe</title>
+        <meta
+          name="description"
+          content={`Prestations disponibles sur rendez-vous : ${prestations_list
+            .map((presta) => presta.name)
+            .join(", ")}`}
+        />
       </Head>
 
       <main className={styles.articlesContainer}>

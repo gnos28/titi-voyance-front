@@ -10,7 +10,11 @@ const Contact: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Les cartes de titiphe</title>
+        <title>Contact - Les cartes de titiphe</title>
+        <meta
+          name="description"
+          content="Live de voyance sur tiktok, live cartomancie tiktok, live guidance tiktok, tirage gratuit, guidance, titiphe28"
+        />
       </Head>
 
       <main className={styles.main}>

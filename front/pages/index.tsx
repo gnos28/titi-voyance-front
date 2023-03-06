@@ -21,6 +21,10 @@ const Home: NextPageWithLayout = () => {
     <>
       <Head>
         <title>Les cartes de titiphe</title>
+        <meta
+          name="description"
+          content="Les cartes de titiphe, voyance et cartomancie"
+        />
       </Head>
       <main className={styles.main}>
         <div>

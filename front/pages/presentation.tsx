@@ -7,14 +7,23 @@ import Image from "next/image";
 
 const Home: NextPageWithLayout = () => {
   const age = (
-    (new Date().getTime() - new Date(1985, 8, 27).getTime()) /
+    (new Date().getTime() - new Date(1982, 8, 27).getTime()) /
     (365 * 24 * 60 * 60 * 1000)
   ).toFixed(0);
 
   return (
     <>
       <Head>
-        <title>Les cartes de titiphe</title>
+        <title>Présentation - Les cartes de titiphe</title>
+        <meta
+          name="description"
+          content="Je vous offre mes dons en cartomancie pour vous aider à éclairer
+          votre chemin de vie. Grâce à ma clairvoyance et à mes ressentis, je
+          capte les énergies, les sentiments et les états d'esprit pour vous
+          fournir une voyance claire et précise. C'est un don familial que je
+          partage avec vous en toute confidentialité, uniquement sur
+          rendez-vous."
+        />
       </Head>
       <main className={styles.main}>
         <aside className={styles.sideBackground}>

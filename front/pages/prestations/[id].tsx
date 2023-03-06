@@ -225,11 +225,8 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="frFR">
         <Head>
-          <title>Les cartes de titiphe</title>
-          <meta
-            name="description"
-            content="Les cartes de titiphe, voyance et cartomancie"
-          />
+          <title>{prestation.name} - Les cartes de titiphe</title>
+          <meta name="description" content={prestation.description_long} />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className={styles.prestationDetailsContainer}>

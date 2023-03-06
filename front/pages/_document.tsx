@@ -4,10 +4,6 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
-        <meta
-          name="description"
-          content="Les cartes de titiphe, voyance et cartomancie"
-        />
         <link rel="icon" href="/favicon96.ico" />
         {/* Global Site Tag (gtag.js) - Google Analytics */}
         <script
