@@ -35,8 +35,8 @@ const PaypalButton = ({
   whatsapp,
   errors,
 }: PaypalButtonProps) => {
-  const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = (
-    data,
+  const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = async (
+    _data,
     actions
   ) => {
     return actions.order
@@ -57,7 +57,7 @@ const PaypalButton = ({
   };
 
   const handleApprove: PayPalButtonsComponentProps["onApprove"] = async (
-    data,
+    _data,
     actions
   ) => {
     const actionsOrder = actions.order;

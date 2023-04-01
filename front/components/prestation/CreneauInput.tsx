@@ -2,7 +2,6 @@ import {
   ListItemButton,
   ListItemText,
   TextField,
-  TextFieldProps,
 } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import React, { BaseSyntheticEvent, useEffect } from "react";

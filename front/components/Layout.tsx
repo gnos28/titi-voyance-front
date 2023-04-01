@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import Header from "./Header";
 import styles from "./Layout.module.scss";
 import Navbar from "./Navbar";
