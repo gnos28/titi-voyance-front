@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   PayPalButtons,
   PayPalButtonsComponentProps,
@@ -7,6 +7,7 @@ import { paypalAPI } from "../../api/paypal";
 import { ErrorMessage } from "../../pages/prestations/[id]";
 import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./PaypalButton.module.scss";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 type PaypalButtonProps = {
   prestation: {
@@ -25,6 +26,7 @@ type PaypalButtonProps = {
   whatsapp: string;
   errors: ErrorMessage[];
   setPaypalOK: React.Dispatch<React.SetStateAction<boolean>>;
+  buttonOnly?: boolean;
 };
 
 const PaypalButton = ({
@@ -36,6 +38,7 @@ const PaypalButton = ({
   whatsapp,
   errors,
   setPaypalOK,
+  buttonOnly,
 }: PaypalButtonProps) => {
   const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = async (
     _data,
@@ -66,8 +69,6 @@ const PaypalButton = ({
     if (!actionsOrder) return new Promise((resolve) => resolve());
 
     return actionsOrder.capture().then(async (details) => {
-      // console.log("details", details);
-
       const { create_time, id, status } = details;
 
       const email_adress = details.payer.email_address;
@@ -112,20 +113,20 @@ const PaypalButton = ({
 
         await paypalAPI.storePaypal(purchasingData);
         setPaypalOK(true);
-        // console.log("purchasingData", purchasingData);
       }
     });
   };
 
   return (
     <>
-      <h3>4. Je paye la prestation via paypal</h3>
+      {buttonOnly !== true && <h3>4. Je paye la prestation via paypal</h3>}
       <div className={styles.paypalContainer}>
         {errors.length === 0 ? (
           <PayPalButtons
             style={{ layout: "horizontal" }}
-            createOrder={handleCreateOrder}
+            createOrder={(data, actions) => handleCreateOrder(data, actions)}
             onApprove={handleApprove}
+            disabled={buttonOnly === true && prestation.price === 0}
           />
         ) : (
           <div className={styles.warning}>
