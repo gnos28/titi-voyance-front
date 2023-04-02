@@ -1,6 +1,9 @@
 import {
+  FormControlLabel,
+  FormGroup,
   ListItemButton,
   ListItemText,
+  Switch,
   TextField,
 } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
@@ -14,6 +17,8 @@ import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./CreneauInput.module.scss";
 
 type CreneauInputProps = {
+  noBookedDate: boolean;
+  setNoBookedDate: React.Dispatch<React.SetStateAction<boolean>>;
   dayBookedSlots: string[];
   monthBookedSlots: string[];
   date: Date | null;
@@ -33,6 +38,8 @@ const hourList = Array(22)
   );
 
 const CreneauInput = ({
+  noBookedDate,
+  setNoBookedDate,
   dayBookedSlots,
   monthBookedSlots,
   date,
@@ -95,6 +102,15 @@ const CreneauInput = ({
     return "";
   };
 
+  const handleSwitchClick = () => {
+    if (noBookedDate === false) {
+      setDate(null);
+      setHour(undefined);
+    }
+
+    setNoBookedDate(!noBookedDate);
+  };
+
   useEffect(() => {
     if (date && hour) {
       const daySlots = convertRawSlotsToDaySlots(monthBookedSlots, date);
@@ -108,17 +124,30 @@ const CreneauInput = ({
     <>
       <h3>
         3. Je choisi un créneau pour le rendez-vous
-        {displaySelectedDateTime()}
+        {!noBookedDate && displaySelectedDateTime()}
       </h3>
+      <div className={styles.switchContainer}>
+        <Switch
+          checked={noBookedDate}
+          onChange={handleSwitchClick}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+        <span className={styles.label} onClick={handleSwitchClick}>
+          Je ne souhaite pas sélectionner de créneau maintenant et serait
+          recontacté plus tard pour la prise d'un rendez-vous
+        </span>
+      </div>
       <div
         className={[
           styles.dateTimeContainer,
-          errors.map((err) => err.type).includes("creneau")
+          errors.map((err) => err.type).includes("creneau") &&
+          noBookedDate === false
             ? styles.creneauWarning
             : "",
+          noBookedDate ? styles.disableCalendar : "",
         ].join(" ")}
       >
-        <div>
+        <div className={styles.dateSelectionContainer}>
           <StaticDatePicker
             displayStaticWrapperAs="desktop"
             disablePast

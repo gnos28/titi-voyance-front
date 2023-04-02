@@ -24,6 +24,7 @@ type PaypalButtonProps = {
   instagram: string;
   whatsapp: string;
   errors: ErrorMessage[];
+  setPaypalOK: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const PaypalButton = ({
@@ -34,6 +35,7 @@ const PaypalButton = ({
   instagram,
   whatsapp,
   errors,
+  setPaypalOK,
 }: PaypalButtonProps) => {
   const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = async (
     _data,
@@ -81,7 +83,7 @@ const PaypalButton = ({
       let address: string | undefined;
       if (rawAddress) address = JSON.stringify(rawAddress);
 
-      if (status === "COMPLETED" && nom && prenom && date && hour) {
+      if (status === "COMPLETED" && nom && prenom) {
         const prestationName = prestation.name;
         const prestationDuration = prestation.duration;
         const prestationPrice = prestation.price;
@@ -109,7 +111,7 @@ const PaypalButton = ({
         };
 
         await paypalAPI.storePaypal(purchasingData);
-
+        setPaypalOK(true);
         // console.log("purchasingData", purchasingData);
       }
     });

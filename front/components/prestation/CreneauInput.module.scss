@@ -1,5 +1,16 @@
 @import "../../styles/variables.scss";
 
+.switchContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  .label {
+    cursor: pointer;
+    z-index: 1;
+    user-select: none;
+  }
+}
+
 .dateTimeContainer {
   height: auto;
   background-color: black;
@@ -9,6 +20,12 @@
   justify-content: center;
   gap: 20px;
   padding: 5px;
+  position: relative;
+  overflow: hidden;
+
+  .dateSelectionContainer{
+    position: relative;
+  }
 
   .hourSelectionContainer {
     overflow: auto;
@@ -19,6 +36,15 @@
     justify-content: flex-start;
     flex-grow: 0;
   }
+}
+
+.disableCalendar:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  filter: opacity(0.9);
 }
 
 .creneauWarning {

@@ -12,7 +12,7 @@ type PurchasingData = {
   nom: string | undefined;
   email_adress: string | undefined;
   address: string | undefined;
-  date: Date | undefined;
+  date: Date | null | undefined;
   hour: string | undefined;
   prestationName: string | undefined;
   prestationDuration: number | undefined;

@@ -15,6 +15,11 @@ type Children = { children: ReactNode };
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    primary: {
+      main: "#9b3869",
+      dark: "#741b47",
+      light: "#c995af",
+    },
   },
 });
 

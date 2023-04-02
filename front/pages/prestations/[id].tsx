@@ -16,15 +16,34 @@ import CreneauInput from "../../components/prestation/CreneauInput";
 import PaypalButton from "../../components/prestation/PaypalButton";
 import { PrestationItem, prestationsAPI } from "../../api/prestations";
 import { GetStaticPaths, GetStaticProps } from "next";
+import StepBanner from "../../components/prestation/StepBanner";
+import StepButtons from "../../components/prestation/StepButtons";
+import AddToCalendar from "../../components/prestation/AddToCalendar";
+
+export type Step =
+  | "Informations"
+  | "Contact"
+  | "Horaire"
+  | "Paiement"
+  | "Confirmation";
 
 export type ErrorMessage = {
-  type: "nom" | "prenom" | "birthdate" | "contact" | "creneau";
+  step: Step;
+  type: "nom" | "prenom" | "birthdate" | "contact" | "creneau" | "paypalNOK";
   content: string;
 };
 
 type Prestation_detailsProps = {
   prestations_list: PrestationItem[];
 };
+
+const steps: Step[] = [
+  "Informations",
+  "Contact",
+  "Horaire",
+  "Paiement",
+  "Confirmation",
+];
 
 export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
   return rawSlots
@@ -67,7 +86,10 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
   const [telephone, setTelephone] = useState<string>("");
   const [instagram, setInstagram] = useState<string>("");
   const [whatsapp, setWhatsapp] = useState<string>("");
+  const [paypalOK, setPaypalOK] = useState(false);
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
+  const [activeStep, setActiveStep] = useState(0);
+  const [noBookedDate, setNoBookedDate] = useState(false);
 
   const prestation = prestations_list.filter(
     (prestation) => prestation.link === id
@@ -110,24 +132,28 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
 
     if (nom === "")
       errorMessages.push({
+        step: "Informations",
         type: "nom",
         content: "veuillez renseigner votre nom",
       });
 
     if (prenom === "")
       errorMessages.push({
+        step: "Informations",
         type: "prenom",
         content: "veuillez renseigner votre prénom",
       });
 
     if (birthdate === null)
       errorMessages.push({
+        step: "Informations",
         type: "birthdate",
         content: "veuillez renseigner votre date de naissance",
       });
 
     if (birthdate !== null && birthdate.getTime() > is18)
       errorMessages.push({
+        step: "Informations",
         type: "birthdate",
         content: "ces prestations sont interdites aux mineurs",
       });
@@ -136,14 +162,16 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
 
     if (telephone === "" && instagram === "" && whatsapp === "")
       errorMessages.push({
+        step: "Contact",
         type: "contact",
         content: "veuillez indiquer un moyen de vous contacter",
       });
 
     if (errorMessages.length) return setErrors(errorMessages);
 
-    if (date === null || !hour)
+    if (noBookedDate === false && ( date === null || !hour ))
       errorMessages.push({
+        step: "Horaire",
         type: "creneau",
         content: "veuillez sélectionner un créneau pour la prestation",
       });
@@ -194,9 +222,27 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
     if (localHour) setHour(localHour);
   };
 
+  const goNextStep = (step: Step) => {
+    const nextStep = steps.findIndex((st) => st === step) + 1;
+
+    if (nextStep < steps.length) setActiveStep(nextStep);
+  };
+
+  const goPreviousStep = (step: Step) => {
+    const previousStep = steps.findIndex((st) => st === step) - 1;
+
+    if (previousStep >= 0) setActiveStep(previousStep);
+  };
+
+  const goToStep = (step: Step) => {
+    const newStep = steps.findIndex((st) => st === step);
+
+    setActiveStep(newStep);
+  };
+
   useEffect(() => {
     allowPaypal();
-  }, [nom, prenom, birthdate, telephone, instagram, whatsapp, date, hour]);
+  }, [nom, prenom, birthdate, telephone, instagram, whatsapp, date, hour, noBookedDate]);
 
   useEffect(() => {
     storeToLocalStorage();
@@ -217,6 +263,10 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
   }, [date]);
 
   useEffect(() => {
+    if (paypalOK) setActiveStep(4);
+  }, [paypalOK]);
+
+  useEffect(() => {
     getBookedSlots();
     retrieveLocalStorage();
   }, []);
@@ -233,47 +283,116 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
           {prestation && (
             <>
               <PrestationHero prestation={prestation} />
-              <PersonalInfosInput
-                nom={nom}
-                setNom={setNom}
-                prenom={prenom}
-                setPrenom={setPrenom}
-                email={email}
-                setEmail={setEmail}
-                birthdate={birthdate}
-                setBirthdate={setBirthdate}
-                errors={errors}
+              <StepBanner
+                steps={steps}
+                activeStep={activeStep}
+                goToStep={goToStep}
               />
-              <ContactInput
-                telephone={telephone}
-                setTelephone={setTelephone}
-                instagram={instagram}
-                setInstagram={setInstagram}
-                whatsapp={whatsapp}
-                setWhatsapp={setWhatsapp}
-                errors={errors}
-              />
-              <CreneauInput
-                dayBookedSlots={dayBookedSlots}
-                monthBookedSlots={monthBookedSlots}
-                date={date}
-                setDate={setDate}
-                hour={hour}
-                setHour={setHour}
-                errors={errors}
-              />
-              <PaypalButton
-                prestation={prestation}
-                date={date}
-                hour={hour}
-                telephone={telephone}
-                instagram={instagram}
-                whatsapp={whatsapp}
-                errors={errors}
-              />
-              <h3>
-                5. Le rendez-vous est pris, je peux l'ajouter à mon agenda 😃
-              </h3>
+              {activeStep === 0 && (
+                <>
+                  <PersonalInfosInput
+                    nom={nom}
+                    setNom={setNom}
+                    prenom={prenom}
+                    setPrenom={setPrenom}
+                    email={email}
+                    setEmail={setEmail}
+                    birthdate={birthdate}
+                    setBirthdate={setBirthdate}
+                    errors={errors}
+                  />
+                  <StepButtons
+                    steps={steps}
+                    step="Informations"
+                    errors={errors}
+                    goNextStep={goNextStep}
+                    goPreviousStep={goPreviousStep}
+                  />
+                </>
+              )}
+              {activeStep === 1 && (
+                <>
+                  <ContactInput
+                    telephone={telephone}
+                    setTelephone={setTelephone}
+                    instagram={instagram}
+                    setInstagram={setInstagram}
+                    whatsapp={whatsapp}
+                    setWhatsapp={setWhatsapp}
+                    errors={errors}
+                  />
+                  <StepButtons
+                    steps={steps}
+                    step="Contact"
+                    errors={errors}
+                    goNextStep={goNextStep}
+                    goPreviousStep={goPreviousStep}
+                  />
+                </>
+              )}
+              {activeStep === 2 && (
+                <>
+                  <CreneauInput
+                    noBookedDate={noBookedDate}
+                    setNoBookedDate={setNoBookedDate}
+                    dayBookedSlots={dayBookedSlots}
+                    monthBookedSlots={monthBookedSlots}
+                    date={date}
+                    setDate={setDate}
+                    hour={hour}
+                    setHour={setHour}
+                    errors={errors}
+                  />
+                  <StepButtons
+                    steps={steps}
+                    step="Horaire"
+                    errors={errors}
+                    goNextStep={goNextStep}
+                    goPreviousStep={goPreviousStep}
+                  />
+                </>
+              )}
+              {activeStep === 3 && (
+                <>
+                  <PaypalButton
+                    prestation={prestation}
+                    date={date}
+                    hour={hour}
+                    telephone={telephone}
+                    instagram={instagram}
+                    whatsapp={whatsapp}
+                    errors={errors}
+                    setPaypalOK={setPaypalOK}
+                  />
+                  <StepButtons
+                    steps={steps}
+                    step="Paiement"
+                    // errors={[]}
+                    errors={
+                      paypalOK
+                        ? []
+                        : [
+                            {
+                              step: "Paiement",
+                              type: "paypalNOK",
+                              content: "paiement NOK",
+                            },
+                          ]
+                    }
+                    goNextStep={goNextStep}
+                    goPreviousStep={goPreviousStep}
+                  />
+                </>
+              )}
+              {activeStep === 4 && (
+                <>
+                  <AddToCalendar
+                    date={date}
+                    hour={hour}
+                    prestation={prestation}
+                  />
+                </>
+              )}
             </>
           )}
         </div>

@@ -1,0 +1,21 @@
+@import "../../styles/variables.scss";
+
+.mobileStepper {
+  display: block;
+  justify-content: center;
+  
+}
+
+.desktopStepper {
+  display: none;
+}
+
+@media screen and (min-width: 650px) {
+  .mobileStepper {
+    display: none;
+  }
+
+  .desktopStepper {
+    display: block;
+  }
+}
