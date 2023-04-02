@@ -18,6 +18,7 @@
     width: 100%;
     min-height: calc(100vh - $header-height-mobile - $navbar-height);
     background-color: black;
+    padding-bottom: 70px;
   }
 }
 
@@ -44,6 +45,7 @@
 
     .mainContainer {
       min-height: calc(100vh - $header-height - $navbar-height);
+      padding-bottom: 0px;
     }
   }
 }

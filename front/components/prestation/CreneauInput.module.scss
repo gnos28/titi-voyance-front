@@ -23,7 +23,7 @@
   position: relative;
   overflow: hidden;
 
-  .dateSelectionContainer{
+  .dateSelectionContainer {
     position: relative;
   }
 
@@ -38,13 +38,8 @@
   }
 }
 
-.disableCalendar:after {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  filter: opacity(0.9);
+.disableCalendar {
+  display: none;
 }
 
 .creneauWarning {
@@ -52,6 +47,19 @@
 }
 
 @media screen and (min-width: 650px) {
+  .disableCalendar {
+    display: flex;
+  }
+
+  .disableCalendar:after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    filter: opacity(0.9);
+  }
+
   .dateTimeContainer {
     flex-direction: row;
     height: 345px;
