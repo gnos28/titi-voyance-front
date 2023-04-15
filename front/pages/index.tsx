@@ -9,8 +9,6 @@ import MenuContext from "../contexts/menuContext";
 import PaypalButton from "../components/prestation/PaypalButton";
 import PriceSelectButtons from "../components/PriceSelectButtons";
 import { PrestationItem } from "../api/prestations";
-import Stripe from "../components/Stripe";
-import StripeButton from "../components/prestation/StripeButton";
 
 const fakePrestation: PrestationItem = {
   name: "don libre",
