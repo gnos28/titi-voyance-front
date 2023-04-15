@@ -27,6 +27,11 @@ type StorePaypal = {
   data: undefined;
 };
 
+type StoreStripe = {
+  status: number;
+  data: { url: string };
+};
+
 export const purchaseAPI = {
   storePaypal: async (purchasingData: PurchasingData): Promise<StorePaypal> => {
     try {
@@ -40,9 +45,9 @@ export const purchaseAPI = {
       return { status: 500, data: undefined };
     }
   },
-  storeStripe: async (purchasingData: PurchasingData): Promise<StorePaypal> => {
+  storeStripe: async (purchasingData: PurchasingData): Promise<StoreStripe> => {
     try {
-      const { status, data }: StorePaypal = await api.csr.post(
+      const { status, data }: StoreStripe = await api.csr.post(
         `/create-checkout-session`,
         {
           purchasingData,
@@ -52,7 +57,7 @@ export const purchaseAPI = {
       return { status, data };
     } catch (e) {
       console.error(e);
-      return { status: 500, data: undefined };
+      return { status: 500, data: { url: "" } };
     }
   },
 };

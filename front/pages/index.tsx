@@ -35,6 +35,8 @@ const Home: NextPageWithLayout = () => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
+    console.log('query.get("success")', query.get("success"));
+
     if (query.get("success")) {
       setPurchaseOK(true);
     }
@@ -138,46 +140,46 @@ const Home: NextPageWithLayout = () => {
                 setPrice={setPrice}
               />
               <div className={styles.paymentButtonsContainer}>
-                {prices.map((p) =>
-                  price === p ? (
-                    <PaypalButton
-                      key={p}
-                      prestation={{ ...fakePrestation, price: p }}
-                      date={null}
-                      hour={undefined}
-                      telephone={""}
-                      instagram={""}
-                      whatsapp={""}
-                      errors={[]}
-                      setPurchaseOK={setPurchaseOK}
-                      buttonOnly={true}
-                    />
-                  ) : null
+                {_purchaseOK ? (
+                  <span>
+                    Votre paiement à bien été récéptionné 👋
+                    <br />
+                    Vous serez très prochainement recontacté pour convenir d'un
+                    rendez-vous.
+                  </span>
+                ) : (
+                  <>
+                    {prices.map((p) =>
+                      price === p ? (
+                        <PaypalButton
+                          key={p}
+                          prestation={{ ...fakePrestation, price: p }}
+                          date={null}
+                          hour={undefined}
+                          telephone={""}
+                          instagram={""}
+                          whatsapp={""}
+                          errors={[]}
+                          setPurchaseOK={setPurchaseOK}
+                          buttonOnly={true}
+                        />
+                      ) : null
+                    )}
+                    {price === 0 && (
+                      <PaypalButton
+                        prestation={{ ...fakePrestation }}
+                        date={null}
+                        hour={undefined}
+                        telephone={""}
+                        instagram={""}
+                        whatsapp={""}
+                        errors={[]}
+                        setPurchaseOK={setPurchaseOK}
+                        buttonOnly={true}
+                      />
+                    )}
+                  </>
                 )}
-                {price === 0 && (
-                  <PaypalButton
-                    prestation={{ ...fakePrestation }}
-                    date={null}
-                    hour={undefined}
-                    telephone={""}
-                    instagram={""}
-                    whatsapp={""}
-                    errors={[]}
-                    setPurchaseOK={setPurchaseOK}
-                    buttonOnly={true}
-                  />
-                )}
-                {/* <StripeButton
-                  prestation={{ ...fakePrestation, price }}
-                  date={null}
-                  hour={undefined}
-                  telephone={""}
-                  instagram={""}
-                  whatsapp={""}
-                  errors={[]}
-                  setPurchaseOK={setPurchaseOK}
-                  buttonOnly={true}
-                /> */}
               </div>
             </>
           )}

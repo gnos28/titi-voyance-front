@@ -59,7 +59,9 @@ const StripeButton = ({
   };
 
   const handleClick = async () => {
-    await purchaseAPI.storeStripe(purchasingData);
+    const { status, data } = await purchaseAPI.storeStripe(purchasingData);
+
+    if (status === 200) window.location.href = data.url;
   };
 
   return (
