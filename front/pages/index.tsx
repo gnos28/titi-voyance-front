@@ -35,8 +35,6 @@ const Home: NextPageWithLayout = () => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
-    console.log('query.get("success")', query.get("success"));
-
     if (query.get("success")) {
       setPurchaseOK(true);
     }
@@ -133,7 +131,10 @@ const Home: NextPageWithLayout = () => {
                   />
                 </Link>
               </div>
-              <h3>Faire un don</h3>
+              <h3 className={styles.h3noMarginBottom}>Faire un don</h3>
+              <h4 className={styles.h4large}>
+                Sélectionnez le montant du don puis votre moyen de paiment
+              </h4>
               <PriceSelectButtons
                 price={price}
                 prices={prices}

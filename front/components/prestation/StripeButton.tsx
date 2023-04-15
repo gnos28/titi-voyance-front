@@ -68,7 +68,7 @@ const StripeButton = ({
     <div className={styles.stripeButtonContainer}>
       <Button
         onClick={handleClick}
-        sx={{ height: 47, width: 276, marginTop: "-5px" }}
+        sx={{ height: 47, width: 300, marginTop: "-5px" }}
         color="info"
         variant="contained"
         startIcon={<CreditCardIcon />}
