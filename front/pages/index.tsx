@@ -9,9 +9,11 @@ import MenuContext from "../contexts/menuContext";
 import PaypalButton from "../components/prestation/PaypalButton";
 import PriceSelectButtons from "../components/PriceSelectButtons";
 import { PrestationItem } from "../api/prestations";
+import Stripe from "../components/Stripe";
+import StripeButton from "../components/prestation/StripeButton";
 
 const fakePrestation: PrestationItem = {
-  name: "",
+  name: "don libre",
   description: "",
   price: 0,
   background: "",
@@ -23,7 +25,7 @@ const fakePrestation: PrestationItem = {
 const Home: NextPageWithLayout = () => {
   const { setMenu } = useContext(MenuContext);
   const [imgSize, setImgSize] = useState<number | undefined>(undefined);
-  const [_paypalOK, setPaypalOK] = useState(false);
+  const [_purchaseOK, setPurchaseOK] = useState(false);
   const [price, setPrice] = useState(0);
   const prices = [3, 5, 10, 20];
 
@@ -31,6 +33,17 @@ const Home: NextPageWithLayout = () => {
     const { innerWidth } = window;
 
     setImgSize(Math.min(500, innerWidth * 0.8));
+
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setPurchaseOK(true);
+    }
+
+    if (query.get("canceled")) {
+      setPurchaseOK(false);
+    }
   }, []);
 
   return (
@@ -126,35 +139,48 @@ const Home: NextPageWithLayout = () => {
                 prices={prices}
                 setPrice={setPrice}
               />
-              {prices.map((p) =>
-                price === p ? (
+              <div className={styles.paymentButtonsContainer}>
+                {prices.map((p) =>
+                  price === p ? (
+                    <PaypalButton
+                      key={p}
+                      prestation={{ ...fakePrestation, price: p }}
+                      date={null}
+                      hour={undefined}
+                      telephone={""}
+                      instagram={""}
+                      whatsapp={""}
+                      errors={[]}
+                      setPurchaseOK={setPurchaseOK}
+                      buttonOnly={true}
+                    />
+                  ) : null
+                )}
+                {price === 0 && (
                   <PaypalButton
-                    key={p}
-                    prestation={{ ...fakePrestation, price: p }}
+                    prestation={{ ...fakePrestation }}
                     date={null}
                     hour={undefined}
                     telephone={""}
                     instagram={""}
                     whatsapp={""}
                     errors={[]}
-                    setPaypalOK={setPaypalOK}
+                    setPurchaseOK={setPurchaseOK}
                     buttonOnly={true}
                   />
-                ) : null
-              )}
-              {price === 0 && (
-                <PaypalButton
-                  prestation={{ ...fakePrestation }}
+                )}
+                {/* <StripeButton
+                  prestation={{ ...fakePrestation, price }}
                   date={null}
                   hour={undefined}
                   telephone={""}
                   instagram={""}
                   whatsapp={""}
                   errors={[]}
-                  setPaypalOK={setPaypalOK}
+                  setPurchaseOK={setPurchaseOK}
                   buttonOnly={true}
-                />
-              )}
+                /> */}
+              </div>
             </>
           )}
         </div>

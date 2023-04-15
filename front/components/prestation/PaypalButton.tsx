@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   PayPalButtons,
   PayPalButtonsComponentProps,
 } from "@paypal/react-paypal-js";
-import { paypalAPI } from "../../api/paypal";
+import { purchaseAPI } from "../../api/purchase";
 import { ErrorMessage } from "../../pages/prestations/[id]";
-import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./PaypalButton.module.scss";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import StripeButton from "./StripeButton";
 
 type PaypalButtonProps = {
   prestation: {
@@ -25,7 +24,7 @@ type PaypalButtonProps = {
   instagram: string;
   whatsapp: string;
   errors: ErrorMessage[];
-  setPaypalOK: React.Dispatch<React.SetStateAction<boolean>>;
+  setPurchaseOK: React.Dispatch<React.SetStateAction<boolean>>;
   buttonOnly?: boolean;
 };
 
@@ -37,7 +36,7 @@ const PaypalButton = ({
   instagram,
   whatsapp,
   errors,
-  setPaypalOK,
+  setPurchaseOK,
   buttonOnly,
 }: PaypalButtonProps) => {
   const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = async (
@@ -111,23 +110,37 @@ const PaypalButton = ({
           whatsapp,
         };
 
-        await paypalAPI.storePaypal(purchasingData);
-        setPaypalOK(true);
+        await purchaseAPI.storePaypal(purchasingData);
+        setPurchaseOK(true);
       }
     });
   };
 
   return (
     <>
-      {buttonOnly !== true && <h3>4. Je paye la prestation via paypal</h3>}
+      {buttonOnly !== true && (
+        <h3>4. Je paye la prestation via paypal ou par carte bancaire</h3>
+      )}
       <div className={styles.paypalContainer}>
         {errors.length === 0 ? (
-          <PayPalButtons
-            style={{ layout: "horizontal" }}
-            createOrder={(data, actions) => handleCreateOrder(data, actions)}
-            onApprove={handleApprove}
-            disabled={buttonOnly === true && prestation.price === 0}
-          />
+          <>
+            <PayPalButtons
+              style={{ layout: "horizontal", tagline: false }}
+              createOrder={(data, actions) => handleCreateOrder(data, actions)}
+              onApprove={handleApprove}
+              disabled={buttonOnly === true && prestation.price === 0}
+            />
+            <StripeButton
+              prestation={prestation}
+              date={date}
+              hour={hour}
+              telephone={telephone}
+              instagram={instagram}
+              whatsapp={whatsapp}
+              errors={errors}
+              setPurchaseOK={setPurchaseOK}
+            />
+          </>
         ) : (
           <div className={styles.warning}>
             {errors.map((message) => (

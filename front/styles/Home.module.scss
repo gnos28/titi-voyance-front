@@ -8,13 +8,17 @@
   position: relative;
   min-height: calc(100vh - $header-height-mobile - $navbar-height);
   padding-top: 40px;
+  margin-bottom: 100px;
 
   & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     user-select: none;
     & > h2,
     & > h3,
     & > h4 {
-      margin-left: 15%;
+      // margin-left: 15%;
       width: 70%;
       color: white;
       text-align: center;
@@ -28,15 +32,18 @@
       color: white;
     }
 
+    & img {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    & img:hover {
+      transform: scale(1.02);
+    }
+
     & .imgContainer {
       overflow: hidden;
-
       & img {
-        transition: transform 1.3s ease-in-out;
-      }
-
-      & img:hover {
-        transform: scale(1.02);
+        transition-duration: 1s;
       }
     }
   }
@@ -86,6 +93,12 @@
   .tiktokContainer > a:hover {
     filter: brightness(1.2);
   }
+
+  .paymentButtonsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 
 @media screen and (min-width: 450px) {
@@ -96,6 +109,8 @@
 
 @media screen and (min-width: 550px) {
   .main {
+    margin-bottom: 10px;
+
     .tiktokContainer > a {
       flex-direction: row;
     }

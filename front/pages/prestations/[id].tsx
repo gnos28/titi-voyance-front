@@ -169,7 +169,7 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
 
     if (errorMessages.length) return setErrors(errorMessages);
 
-    if (noBookedDate === false && ( date === null || !hour ))
+    if (noBookedDate === false && (date === null || !hour))
       errorMessages.push({
         step: "Horaire",
         type: "creneau",
@@ -242,7 +242,17 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
 
   useEffect(() => {
     allowPaypal();
-  }, [nom, prenom, birthdate, telephone, instagram, whatsapp, date, hour, noBookedDate]);
+  }, [
+    nom,
+    prenom,
+    birthdate,
+    telephone,
+    instagram,
+    whatsapp,
+    date,
+    hour,
+    noBookedDate,
+  ]);
 
   useEffect(() => {
     storeToLocalStorage();
@@ -362,7 +372,7 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
                     instagram={instagram}
                     whatsapp={whatsapp}
                     errors={errors}
-                    setPaypalOK={setPaypalOK}
+                    setPurchaseOK={setPaypalOK}
                   />
                   <StepButtons
                     steps={steps}

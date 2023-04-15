@@ -1,6 +1,6 @@
 import { api } from "./api";
 
-type PurchasingData = {
+export type PurchasingData = {
   id: number;
   create_time: string | undefined;
   purchasedAmount: string | undefined;
@@ -27,12 +27,27 @@ type StorePaypal = {
   data: undefined;
 };
 
-export const paypalAPI = {
+export const purchaseAPI = {
   storePaypal: async (purchasingData: PurchasingData): Promise<StorePaypal> => {
     try {
       const { status, data }: StorePaypal = await api.csr.post(`/storePaypal`, {
         purchasingData,
       });
+
+      return { status, data };
+    } catch (e) {
+      console.error(e);
+      return { status: 500, data: undefined };
+    }
+  },
+  storeStripe: async (purchasingData: PurchasingData): Promise<StorePaypal> => {
+    try {
+      const { status, data }: StorePaypal = await api.csr.post(
+        `/create-checkout-session`,
+        {
+          purchasingData,
+        }
+      );
 
       return { status, data };
     } catch (e) {
