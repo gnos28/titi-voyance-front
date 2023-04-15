@@ -133,7 +133,7 @@ const Home: NextPageWithLayout = () => {
               </div>
               <h3 className={styles.h3noMarginBottom}>Faire un don</h3>
               <h4 className={styles.h4large}>
-                Sélectionnez le montant du don puis votre moyen de paiment
+                Sélectionnez le montant du don puis votre moyen de paiement
               </h4>
               <PriceSelectButtons
                 price={price}
