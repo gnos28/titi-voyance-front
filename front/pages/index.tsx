@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 import type { NextPageWithLayout } from "./_app";
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.scss";
@@ -50,16 +50,18 @@ const Home: NextPageWithLayout = () => {
                 href={"presentation"}
                 onClick={() => setMenu("/presentation")}
               >
-                <Image
-                  src="/titiphe_landing.webp"
-                  alt="titiphe_landing"
-                  sizes="(max-width: 768px) 100vw,
+                <div className={styles.imgContainer}>
+                  <Image
+                    src="/titiphe_landing.webp"
+                    alt="titiphe_landing"
+                    sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"
-                  width={imgSize}
-                  height={imgSize}
-                  draggable={false}
-                />
+                    width={imgSize}
+                    height={imgSize}
+                    draggable={false}
+                  />
+                </div>
               </Link>
               <h2>
                 Voyance, Cartomancie
@@ -67,7 +69,7 @@ const Home: NextPageWithLayout = () => {
                 Soins energétiques
               </h2>
               <h3>Retrouvez moi sur</h3>
-            <div className={styles.linkContainer}>
+              <div className={styles.linkContainer}>
                 <Link
                   href={"https://www.tiktok.com/@titiphe.28"}
                   target="_blank"
@@ -84,7 +86,9 @@ const Home: NextPageWithLayout = () => {
                   />
                 </Link>
                 <Link
-                  href={"https://instagram.com/les_cartes_de_titiphe?igshid=ZDdkNTZiNTM="}
+                  href={
+                    "https://instagram.com/les_cartes_de_titiphe?igshid=ZDdkNTZiNTM="
+                  }
                   target="_blank"
                 >
                   <Image
@@ -99,7 +103,9 @@ const Home: NextPageWithLayout = () => {
                   />
                 </Link>
                 <Link
-                  href={"https://www.facebook.com/profile.php?id=100090645823445"}
+                  href={
+                    "https://www.facebook.com/profile.php?id=100090645823445"
+                  }
                   target="_blank"
                 >
                   <Image

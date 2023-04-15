@@ -20,28 +20,32 @@
       text-align: center;
     }
 
-    & > h3 { 
-font-size: 24px;
+    & > h3 {
+      font-size: 24px;
     }
 
     & > p {
       color: white;
     }
 
-    & img {
-      transition: transform 0.3s ease-in-out;
-    }
+    & .imgContainer {
+      overflow: hidden;
 
-    & img:hover {
-      transform: scale(1.02);
+      & img {
+        transition: transform 1.3s ease-in-out;
+      }
+
+      & img:hover {
+        transform: scale(1.02);
+      }
     }
   }
 
-.linkContainer {
-  display: flex;
-  justify-content: center;
-  gap:20px;
-}
+  .linkContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
   .tiktokContainer > a {
     margin: 15px;
