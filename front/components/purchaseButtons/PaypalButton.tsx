@@ -1,12 +1,9 @@
-import React from "react";
 import {
   PayPalButtons,
   PayPalButtonsComponentProps,
 } from "@paypal/react-paypal-js";
-import { purchaseAPI } from "../../api/purchase";
-import { ErrorMessage } from "../../pages/prestations/[id]";
-import styles from "./PaypalButton.module.scss";
-import StripeButton from "./StripeButton";
+import React from "react";
+import { PurchasingData } from "../../api/purchase";
 
 type PaypalButtonProps = {
   prestation: {
@@ -18,32 +15,22 @@ type PaypalButtonProps = {
     description_long: string;
     duration: number;
   };
-  date: Date | null;
-  hour: string | undefined;
-  telephone: string;
-  instagram: string;
-  whatsapp: string;
-  errors: ErrorMessage[];
   setPurchaseOK: React.Dispatch<React.SetStateAction<boolean>>;
-  buttonOnly?: boolean;
+  purchasingData: PurchasingData;
+  setPurchasingData: React.Dispatch<React.SetStateAction<PurchasingData>>;
 };
 
 const PaypalButton = ({
-  prestation,
-  date,
-  hour,
-  telephone,
-  instagram,
-  whatsapp,
-  errors,
   setPurchaseOK,
-  buttonOnly,
+  prestation,
+  setPurchasingData,
+  purchasingData,
 }: PaypalButtonProps) => {
   const handleCreateOrder: PayPalButtonsComponentProps["createOrder"] = async (
     _data,
     actions
-  ) => {
-    return actions.order
+  ) =>
+    actions.order
       .create({
         purchase_units: [
           {
@@ -54,11 +41,11 @@ const PaypalButton = ({
           },
         ],
       })
-      .then((orderId) => {
-        // Your code here after create the order
-        return orderId;
-      });
-  };
+      .then(
+        (orderId) =>
+          // Your code here after create the order
+          orderId
+      );
 
   const handleApprove: PayPalButtonsComponentProps["onApprove"] = async (
     _data,
@@ -88,7 +75,8 @@ const PaypalButton = ({
         const prestationDuration = prestation.duration;
         const prestationPrice = prestation.price;
 
-        const purchasingData = {
+        setPurchasingData({
+          ...purchasingData,
           id: parseInt(id, 10),
           create_time,
           purchasedAmount,
@@ -100,56 +88,23 @@ const PaypalButton = ({
           nom,
           email_adress,
           address,
-          date,
-          hour,
           prestationName,
           prestationDuration,
           prestationPrice,
-          telephone,
-          instagram,
-          whatsapp,
-        };
+        });
 
-        await purchaseAPI.storePaypal(purchasingData);
         setPurchaseOK(true);
       }
     });
   };
 
   return (
-    <>
-      {buttonOnly !== true && (
-        <h3>4. Je paye la prestation via paypal ou par carte bancaire</h3>
-      )}
-      <div className={styles.paypalContainer}>
-        {errors.length === 0 ? (
-          <>
-            <PayPalButtons
-              style={{ layout: "horizontal", tagline: false }}
-              createOrder={(data, actions) => handleCreateOrder(data, actions)}
-              onApprove={handleApprove}
-              disabled={buttonOnly === true && prestation.price === 0}
-            />
-            <StripeButton
-              prestation={prestation}
-              date={date}
-              hour={hour}
-              telephone={telephone}
-              instagram={instagram}
-              whatsapp={whatsapp}
-              errors={errors}
-              setPurchaseOK={setPurchaseOK}
-            />
-          </>
-        ) : (
-          <div className={styles.warning}>
-            {errors.map((message) => (
-              <p key={message.type}>- {message.content}</p>
-            ))}
-          </div>
-        )}
-      </div>
-    </>
+    <PayPalButtons
+      style={{ layout: "horizontal", tagline: false }}
+      createOrder={(data, actions) => handleCreateOrder(data, actions)}
+      onApprove={handleApprove}
+      disabled={prestation.price === 0}
+    />
   );
 };
 

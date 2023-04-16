@@ -1,10 +1,10 @@
+/* eslint-disable no-useless-escape */
 import { TextField } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import React from "react";
 import dayjs from "dayjs";
 import { ErrorMessage } from "../../pages/prestations/[id]";
 import genericStyles from "../../styles/Prestation_details.module.scss";
-import styles from "./PersonalInfosInput.module.scss";
 
 type PersonalInfosInputProps = {
   nom: string;

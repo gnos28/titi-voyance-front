@@ -4,6 +4,7 @@ import type { NextPageWithLayout } from "./_app";
 import Layout from "../components/Layout";
 import styles from "../styles/Prestations.module.scss";
 import Prestation from "../components/Prestation";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import Card from "react-animated-3d-card";
 // import { PrestationItem, prestations_list } from "../data/prestations_list";
@@ -40,35 +41,30 @@ const Prestations: NextPageWithLayout<PrestationsProps> = ({
     return "";
   };
 
-  const getCard = (prestation: PrestationItem) => {
-    return (
-      <article>
-        <Prestation
-          name={prestation.name}
-          description={prestation.description}
-          price={prestation.price}
-          background={prestation.background}
-          link={prestation.link}
-        />
-      </article>
-    );
-  };
+  const getCard = (prestation: PrestationItem) => (
+    <article>
+      <Prestation
+        name={prestation.name}
+        description={prestation.description}
+        price={prestation.price}
+        background={prestation.background}
+      />
+    </article>
+  );
 
-  const getAnimatedCard = (prestation: PrestationItem, onClick: () => void) => {
-    return (
-      <>
-        {allowAnimation ? (
-          <Card onClick={onClick}>{getCard(prestation)}</Card>
-        ) : (
-          <div onClick={onClick} className={styles.firefoxCardContainer}>
-            <div>
-              <div>{getCard(prestation)}</div>
-            </div>
+  const getAnimatedCard = (prestation: PrestationItem, onClick: () => void) => (
+    <>
+      {allowAnimation ? (
+        <Card onClick={onClick}>{getCard(prestation)}</Card>
+      ) : (
+        <div onClick={onClick} className={styles.firefoxCardContainer}>
+          <div>
+            <div>{getCard(prestation)}</div>
           </div>
-        )}
-      </>
-    );
-  };
+        </div>
+      )}
+    </>
+  );
 
   useEffect(() => {
     setAnimateCard(undefined);

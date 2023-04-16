@@ -41,17 +41,17 @@ const Home: NextPageWithLayout = () => {
           <h2 className={styles.title}>Qui suis-je ?</h2>
           <p>
             Je suis Tiphaine, une cartomancienne et praticienne en soins
-            énergétiques à distance avec plus de 20 ans d'expérience. Agée de{" "}
-            {age} ans, la spiritualité et le paranormal font partie intégrante
-            de ma vie depuis mon plus jeune âge.
+            énergétiques à distance avec plus de 20 ans d&apos;expérience. Agée
+            de {age} ans, la spiritualité et le paranormal font partie
+            intégrante de ma vie depuis mon plus jeune âge.
           </p>
           <p>
             Je vous offre mes dons en cartomancie pour vous aider à éclairer
             votre chemin de vie. Grâce à ma clairvoyance et à mes ressentis, je
-            capte les énergies, les sentiments et les états d'esprit pour vous
-            fournir une voyance claire et précise. C'est un don familial que je
-            partage avec vous en toute confidentialité, uniquement sur
-            rendez-vous.
+            capte les énergies, les sentiments et les états d&apos;esprit pour
+            vous fournir une voyance claire et précise. C&apos;est un don
+            familial que je partage avec vous en toute confidentialité,
+            uniquement sur rendez-vous.
           </p>
           <p>
             Rejoignez-moi pour une expérience spirituelle enrichissante, je suis

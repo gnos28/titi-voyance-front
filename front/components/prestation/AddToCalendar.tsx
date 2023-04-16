@@ -9,8 +9,8 @@ type AddToCalendarProps = {
   prestation: PrestationItem;
 };
 const AddToCalendar = ({ date, hour, prestation }: AddToCalendarProps) => {
-  let startDate: string = "";
-  let endTime: string = "";
+  let startDate = "";
+  let endTime = "";
 
   if (date && hour) {
     const startYear = date.getFullYear();
@@ -45,7 +45,9 @@ const AddToCalendar = ({ date, hour, prestation }: AddToCalendarProps) => {
     <div>
       {date !== null && hour !== undefined && (
         <>
-          <h3>5. Le rendez-vous est pris, je peux l'ajouter à mon agenda 😃</h3>
+          <h3>
+            5. Le rendez-vous est pris, je peux l&apos;ajouter à mon agenda 😃
+          </h3>
           <div className={styles.container}>
             <div>
               <AddToCalendarButton

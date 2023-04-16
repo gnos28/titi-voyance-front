@@ -1,8 +1,8 @@
 import React from "react";
 import Prestation from "../Prestation";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import Card from "react-animated-3d-card";
-import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./PrestationHero.module.scss";
 import { prestations_list } from "../../data/prestations_list";
 import Link from "next/link";
@@ -60,7 +60,6 @@ const PrestationHero = ({ prestation }: PrestationHeroProps) => {
                 description={prestation.description}
                 price={prestation.price}
                 background={prestation.background}
-                link={prestation.link}
               />
             </article>
           </Card>

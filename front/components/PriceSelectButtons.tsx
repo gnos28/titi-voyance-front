@@ -1,5 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./PriceSelectButtons.module.scss";
 
 type PriceSelectButtonsProps = {
@@ -8,10 +8,11 @@ type PriceSelectButtonsProps = {
   setPrice: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const PriceSelectButtons = ({ price,
-prices,
-  setPrice }: PriceSelectButtonsProps) => {
-
+const PriceSelectButtons = ({
+  price,
+  prices,
+  setPrice,
+}: PriceSelectButtonsProps) => {
   const handleChangePrice = (
     _event: React.MouseEvent<HTMLElement, MouseEvent>,
     value: number

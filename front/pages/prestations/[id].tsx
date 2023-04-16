@@ -13,7 +13,7 @@ import PrestationHero from "../../components/prestation/PrestationHero";
 import PersonalInfosInput from "../../components/prestation/PersonalInfosInput";
 import ContactInput from "../../components/prestation/ContactInput";
 import CreneauInput from "../../components/prestation/CreneauInput";
-import PaypalButton from "../../components/prestation/PaypalButton";
+import PurchaseButtons from "../../components/prestation/PurchaseButtons";
 import { PrestationItem, prestationsAPI } from "../../api/prestations";
 import { GetStaticPaths, GetStaticProps } from "next";
 import StepBanner from "../../components/prestation/StepBanner";
@@ -45,8 +45,8 @@ const steps: Step[] = [
   "Confirmation",
 ];
 
-export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
-  return rawSlots
+export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) =>
+  rawSlots
     .filter((raw) => {
       const rawDate = new Date(raw);
       const rawYear = rawDate.getFullYear();
@@ -67,7 +67,6 @@ export const convertRawSlotsToDaySlots = (rawSlots: string[], date: Date) => {
       const rawMin = rawDate.getMinutes().toString().padStart(2, "0");
       return `${rawHour}:${rawMin}`;
     });
-};
 
 const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
   prestations_list,
@@ -86,7 +85,7 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
   const [telephone, setTelephone] = useState<string>("");
   const [instagram, setInstagram] = useState<string>("");
   const [whatsapp, setWhatsapp] = useState<string>("");
-  const [paypalOK, setPaypalOK] = useState(false);
+  const [purchaseOK, setPurchaseOK] = useState(false);
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [noBookedDate, setNoBookedDate] = useState(false);
@@ -272,9 +271,13 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
     getBookedSlots();
   }, [date]);
 
-  useEffect(() => {
-    if (paypalOK) setActiveStep(4);
-  }, [paypalOK]);
+  const goToNextStep = () => {
+    setActiveStep(4);
+  };
+
+  // useEffect(() => {
+  //   if (purchaseOK) setActiveStep(4);
+  // }, [purchaseOK]);
 
   useEffect(() => {
     getBookedSlots();
@@ -364,7 +367,7 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
               )}
               {activeStep === 3 && (
                 <>
-                  <PaypalButton
+                  <PurchaseButtons
                     prestation={prestation}
                     date={date}
                     hour={hour}
@@ -372,14 +375,16 @@ const Prestation_details: NextPageWithLayout<Prestation_detailsProps> = ({
                     instagram={instagram}
                     whatsapp={whatsapp}
                     errors={errors}
-                    setPurchaseOK={setPaypalOK}
+                    purchaseOK={purchaseOK}
+                    setPurchaseOK={setPurchaseOK}
+                    goToNextStep={goToNextStep}
                   />
                   <StepButtons
                     steps={steps}
                     step="Paiement"
                     // errors={[]}
                     errors={
-                      paypalOK
+                      purchaseOK
                         ? []
                         : [
                             {

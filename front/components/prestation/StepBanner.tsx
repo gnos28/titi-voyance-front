@@ -108,7 +108,11 @@ const StepBanner = ({ steps, activeStep, goToStep }: StepBannerProps) => {
           steps={steps.length}
           position="static"
           activeStep={activeStep}
-          sx={{ justifyContent:"center", flexGrow: 1, backgroundColor: "black" }}
+          sx={{
+            justifyContent: "center",
+            flexGrow: 1,
+            backgroundColor: "black",
+          }}
           nextButton={null}
           backButton={null}
         />

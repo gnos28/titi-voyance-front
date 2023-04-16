@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import MenuContext from "../contexts/menuContext";
-import PaypalButton from "../components/prestation/PaypalButton";
+import PurchaseButtons from "../components/prestation/PurchaseButtons";
 import PriceSelectButtons from "../components/PriceSelectButtons";
 import { PrestationItem } from "../api/prestations";
 
@@ -145,14 +145,14 @@ const Home: NextPageWithLayout = () => {
                   <span>
                     Votre paiement à bien été récéptionné 👋
                     <br />
-                    Vous serez très prochainement recontacté pour convenir d'un
-                    rendez-vous.
+                    Vous serez très prochainement recontacté pour convenir
+                    d&apos;un rendez-vous.
                   </span>
                 ) : (
                   <>
                     {prices.map((p) =>
                       price === p ? (
-                        <PaypalButton
+                        <PurchaseButtons
                           key={p}
                           prestation={{ ...fakePrestation, price: p }}
                           date={null}
@@ -161,13 +161,14 @@ const Home: NextPageWithLayout = () => {
                           instagram={""}
                           whatsapp={""}
                           errors={[]}
+                          purchaseOK={_purchaseOK}
                           setPurchaseOK={setPurchaseOK}
                           buttonOnly={true}
                         />
                       ) : null
                     )}
                     {price === 0 && (
-                      <PaypalButton
+                      <PurchaseButtons
                         prestation={{ ...fakePrestation }}
                         date={null}
                         hour={undefined}
@@ -175,6 +176,7 @@ const Home: NextPageWithLayout = () => {
                         instagram={""}
                         whatsapp={""}
                         errors={[]}
+                        purchaseOK={_purchaseOK}
                         setPurchaseOK={setPurchaseOK}
                         buttonOnly={true}
                       />

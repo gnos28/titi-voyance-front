@@ -1,17 +1,17 @@
-import { api } from "./api";
+import { api } from "./_api";
 
 export type PurchasingData = {
-  id: number;
-  create_time: string | undefined;
-  purchasedAmount: string | undefined;
-  purchasedCurrency: string | undefined;
-  status: string | undefined;
-  payer_id: string | undefined;
-  payer_name: string | undefined;
-  prenom: string | undefined;
-  nom: string | undefined;
-  email_adress: string | undefined;
-  address: string | undefined;
+  id?: number;
+  create_time?: string | undefined;
+  purchasedAmount?: string | undefined;
+  purchasedCurrency?: string | undefined;
+  status?: string | undefined;
+  payer_id?: string | undefined;
+  payer_name?: string | undefined;
+  prenom?: string | undefined;
+  nom?: string | undefined;
+  email_adress?: string | undefined;
+  address?: string | undefined;
   date: Date | null | undefined;
   hour: string | undefined;
   prestationName: string | undefined;
@@ -22,22 +22,27 @@ export type PurchasingData = {
   whatsapp: string | undefined;
 };
 
-type StorePaypal = {
+type StorePurchase = {
   status: number;
   data: undefined;
 };
 
-type StoreStripe = {
+type CreateStripeSession = {
   status: number;
   data: { url: string };
 };
 
 export const purchaseAPI = {
-  storePaypal: async (purchasingData: PurchasingData): Promise<StorePaypal> => {
+  storePurchase: async (
+    purchasingData: PurchasingData
+  ): Promise<StorePurchase> => {
     try {
-      const { status, data }: StorePaypal = await api.csr.post(`/storePaypal`, {
-        purchasingData,
-      });
+      const { status, data }: StorePurchase = await api.csr.post(
+        `/storePurchase`,
+        {
+          purchasingData,
+        }
+      );
 
       return { status, data };
     } catch (e) {
@@ -45,9 +50,11 @@ export const purchaseAPI = {
       return { status: 500, data: undefined };
     }
   },
-  storeStripe: async (purchasingData: PurchasingData): Promise<StoreStripe> => {
+  createStripeSession: async (
+    purchasingData: PurchasingData
+  ): Promise<CreateStripeSession> => {
     try {
-      const { status, data }: StoreStripe = await api.csr.post(
+      const { status, data }: CreateStripeSession = await api.csr.post(
         `/create-checkout-session`,
         {
           purchasingData,

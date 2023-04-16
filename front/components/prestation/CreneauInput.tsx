@@ -1,11 +1,4 @@
-import {
-  FormControlLabel,
-  FormGroup,
-  ListItemButton,
-  ListItemText,
-  Switch,
-  TextField,
-} from "@mui/material";
+import { ListItemButton, ListItemText, Switch, TextField } from "@mui/material";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 import React, { BaseSyntheticEvent, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
@@ -13,7 +6,6 @@ import {
   convertRawSlotsToDaySlots,
   ErrorMessage,
 } from "../../pages/prestations/[id]";
-import genericStyles from "../../styles/Prestation_details.module.scss";
 import styles from "./CreneauInput.module.scss";
 
 type CreneauInputProps = {
@@ -134,7 +126,7 @@ const CreneauInput = ({
         />
         <span className={styles.label} onClick={handleSwitchClick}>
           Je ne souhaite pas sélectionner de créneau maintenant et serait
-          recontacté plus tard pour la prise d'un rendez-vous
+          recontacté plus tard pour la prise d&apos;un rendez-vous
         </span>
       </div>
       <div

@@ -33,12 +33,13 @@ const initialOptions: ScriptProviderProps["options"] = {
 export default function Layout({ children }: Children) {
   const layoutContainer = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  let previousRoute = "";
+  const previousRoute = useRef("");
+  // let previousRoute = "";
 
   useEffect(() => {
     const currentRoute = router.route;
-    if (currentRoute !== previousRoute && layoutContainer.current) {
-      previousRoute = currentRoute;
+    if (currentRoute !== previousRoute.current && layoutContainer.current) {
+      previousRoute.current = currentRoute;
       layoutContainer.current.scrollTo({ top: 0 });
     }
   });

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PurchasingData, purchaseAPI } from "../../api/purchase";
 import styles from "./StripeButton.module.scss";
 import { Button } from "@mui/material";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import { ErrorMessage } from "../../pages/prestations/[id]";
 
 type StripeButtonProps = {
   prestation: {
@@ -20,9 +19,7 @@ type StripeButtonProps = {
   telephone: string;
   instagram: string;
   whatsapp: string;
-  errors: ErrorMessage[];
   setPurchaseOK: React.Dispatch<React.SetStateAction<boolean>>;
-  buttonOnly?: boolean;
 };
 
 const StripeButton = ({
@@ -32,9 +29,7 @@ const StripeButton = ({
   telephone,
   instagram,
   whatsapp,
-  errors,
   setPurchaseOK,
-  buttonOnly,
 }: StripeButtonProps) => {
   const purchasingData: PurchasingData = {
     id: new Date().getTime(),
@@ -59,10 +54,25 @@ const StripeButton = ({
   };
 
   const handleClick = async () => {
-    const { status, data } = await purchaseAPI.storeStripe(purchasingData);
+    const { status, data } = await purchaseAPI.createStripeSession(
+      purchasingData
+    );
 
     if (status === 200) window.location.href = data.url;
   };
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setPurchaseOK(true);
+    }
+
+    if (query.get("canceled")) {
+      setPurchaseOK(false);
+    }
+  }, []);
 
   return (
     <div className={styles.stripeButtonContainer}>
