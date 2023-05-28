@@ -82,7 +82,7 @@ const Home: NextPageWithLayout = () => {
               <h3>Retrouvez moi sur</h3>
               <div className={styles.linkContainer}>
                 <Link
-                  href={"https://www.tiktok.com/@titiphe.28"}
+                  href={"https://www.tiktok.com/@titiphe.com"}
                   target="_blank"
                 >
                   <Image
@@ -97,9 +97,7 @@ const Home: NextPageWithLayout = () => {
                   />
                 </Link>
                 <Link
-                  href={
-                    "https://instagram.com/les_cartes_de_titiphe?igshid=ZDdkNTZiNTM="
-                  }
+                  href={"https://www.instagram.com/les_cartes_de_titiphe/"}
                   target="_blank"
                 >
                   <Image
