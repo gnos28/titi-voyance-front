@@ -57,6 +57,26 @@ const Home: NextPageWithLayout = () => {
         <div>
           {imgSize !== undefined && (
             <>
+              <div className={styles.alert}>
+                <Image
+                  src="/fake_tiktok.jpg"
+                  alt="fake_tiktok"
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+                  width={imgSize / 2}
+                  height={imgSize / 2}
+                  draggable={false}
+                />
+                <p className={styles.alertTitle}>
+                  ATTENTION : CE COMPTE EST UN FAUX
+                </p>
+                <p>
+                  Il s'agit d'une personne tentant de se faire passer pour moi
+                  pour vous soutirer des paiements, ne suivez pas ses
+                  instructions.
+                </p>
+              </div>
               <Link
                 href={"presentation"}
                 onClick={() => setMenu("/presentation")}
@@ -82,7 +102,7 @@ const Home: NextPageWithLayout = () => {
               <h3>Retrouvez moi sur</h3>
               <div className={styles.linkContainer}>
                 <Link
-                  href={"https://www.tiktok.com/@titiphe.com"}
+                  href={"https://www.tiktok.com/@les.cartes.de.titiphe"}
                   target="_blank"
                 >
                   <Image

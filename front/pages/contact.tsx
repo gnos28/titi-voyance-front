@@ -20,7 +20,10 @@ const Contact: NextPageWithLayout = () => (
       <div>
         <h2>retrouvez moi sur tik-tok</h2>
         <div className={styles.tiktokContainer}>
-          <Link href={"https://www.tiktok.com/@titiphe.com"} target="_blank">
+          <Link
+            href={"https://www.tiktok.com/@les.cartes.de.titiphe"}
+            target="_blank"
+          >
             <Image
               src="/titiphe_tiktok.webp"
               alt="titiphe tiktok"
@@ -42,7 +45,7 @@ const Contact: NextPageWithLayout = () => (
                 height={31.308346}
                 draggable={false}
               />
-              <p>@titiphe.com</p>
+              <p>@les.cartes.de.titiphe</p>
               <p>Les cartes de titiphe</p>
             </div>
           </Link>
