@@ -25,7 +25,7 @@ const Home: NextPageWithLayout = () => {
   const [imgSize, setImgSize] = useState<number | undefined>(undefined);
   const [_purchaseOK, setPurchaseOK] = useState(false);
   const [price, setPrice] = useState(0);
-  const prices = [3, 5, 10, 20];
+  const prices = [8, 15, 20, 30, 40, 50];
 
   useEffect(() => {
     const { innerWidth } = window;
