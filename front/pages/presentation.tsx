@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Home: NextPageWithLayout = () => {
   const age = (
-    (new Date().getTime() - new Date(1982, 8, 27).getTime()) /
+    (new Date().getTime() - new Date(1985, 8, 27).getTime()) /
     (365 * 24 * 60 * 60 * 1000)
   ).toFixed(0);
 
