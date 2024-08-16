@@ -129,7 +129,9 @@ const Home: NextPageWithLayout = () => {
                   />
                 </Link>
               </div>
-              <h3 className={styles.h3noMarginBottom}>Faire un don</h3>
+              <h3 className={styles.h3noMarginBottom}>
+                Faire un don (UNIQUEMENT PENDANT LES LIVES TIKTOK)
+              </h3>
               <h4 className={styles.h4large}>
                 Sélectionnez le montant du don puis votre moyen de paiement
               </h4>

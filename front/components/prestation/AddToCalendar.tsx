@@ -48,6 +48,9 @@ const AddToCalendar = ({ date, hour, prestation }: AddToCalendarProps) => {
           <h3>
             5. Le rendez-vous est pris, je peux l&apos;ajouter à mon agenda 😃
           </h3>
+          <p>
+            Voici mon numéro de téléphone en cas de problème : 06 71 56 38 38
+          </p>
           <div className={styles.container}>
             <div>
               <AddToCalendarButton
