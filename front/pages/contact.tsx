@@ -50,7 +50,7 @@ const Contact: NextPageWithLayout = () => (
             </div>
           </Link>
         </div>
-        <h3>En live du lundi au vendredi à partir de 22h</h3>
+        {/* <h3>En live du lundi au vendredi à partir de 22h</h3> */}
       </div>
     </main>
   </>
