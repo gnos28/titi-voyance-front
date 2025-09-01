@@ -128,6 +128,18 @@ const Home: NextPageWithLayout = () => {
                     draggable={false}
                   />
                 </Link>
+                <Link href={"https://wa.me/33671563838"} target="_blank">
+                  <Image
+                    src="/whatsapp.svg"
+                    alt="titiphe whatsapp"
+                    sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
+                    width={88}
+                    height={88}
+                    draggable={false}
+                  />
+                </Link>
               </div>
               <h3 className={styles.h3noMarginBottom}>
                 Faire un don (UNIQUEMENT PENDANT LES LIVES TIKTOK)
